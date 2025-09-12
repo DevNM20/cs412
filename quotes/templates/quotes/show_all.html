@@ -1,18 +1,16 @@
 {% extends 'quotes/base.html' %}
-        {% block content %}
+{% load static %}
+
+{% block content %}
         <h1>Monkey D. Luffy Quote of the Day</h1> <br>
         <h2>All quotes by Monkey D. Luffy</h2><br>
-    <ul>
-        <li>Without You, I Won’t… I Can’t Become The Pirate King!!!</li>
-        <li>Are We Friends? Or Are We Foes? That’s The Kind Of Thing You Decide For Yourselves!</li>
-        <li>If You Hurt Somebody… Or If Somebody Hurts You, The Blood That Flows Is Still Red.</li>
-        <li>If You Don’t Take Risks, You Can’t Create A Future</li>
-        <li>You Want To Keep Everyone From Dying? That’s Naive. It’s War. People Die.</li>
-    </ul>
 
-    <ul>
-        {% for image in totalimages %}:
-        <img class="luffyimg" src="{{totalimages}}"></img>
-    </ul>
+        {% for quote in totalquotes %}
+            <p class="p">{{ quote }}</p>
+        {% endfor %}
+    
+        {% for image in totalimages %}
+            <img class="luffyimg" src="{{ image }}">
+        {% endfor %}
 {% endblock %}
 
