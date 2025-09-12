@@ -1,5 +1,3 @@
-#file: hw/views.py
-
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 
@@ -24,6 +22,9 @@ QUOTES = [
     "You Want To Keep Everyone From Dying? That’s Naive. It’s War. People Die.",
 ]
 # Create your views here.
+
+def home(request):
+    return HttpResponse("412 project")
 
 def home_page(request):
         '''Respond to the URL '', delegate work to a template.'''
