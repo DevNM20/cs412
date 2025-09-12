@@ -1,0 +1,25 @@
+{% load static %}
+<html>
+    <head>
+        <title>Monkey D. Luffy Quote of the Day</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body>
+        <nav>
+            <li><a href="{% url 'home_page' %}">Home</a></li>
+            <li><a href="{% url 'about_page' %}">About</a></li>
+            <li><a href="{% url 'show_all_page' %}">Show_All</a></li>
+        </nav>
+        <!-- put page specific content here -->
+        <main>
+         {% block content %}
+         {% endblock %}
+        </main>
+    <footer>
+        <p>
+            Page created by bmoges18@bu.edu <br>
+            Generated at: {{time}} <br>
+        </p>
+    </footer>
+    </body>
+</html>
