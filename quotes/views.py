@@ -1,3 +1,8 @@
+# File: base.html.py
+# Author: Nathan Moges (bmoges18@bu.edu), 9/12/2025
+# Description: This is my views.py file which will return a Httpresponse for all the 
+#functions when the render helper function is being used. 
+
 from django.shortcuts import render
 from django.http import HttpRequest, HttpResponse
 
@@ -24,8 +29,7 @@ QUOTES = [
 # Create your views here.
 
 def home_page(request):
-        '''Respond to the URL '', delegate work to a template.'''
-
+    '''Respond to the URL 'show_all', delegate work to a template.'''
         template_name = 'quotes/home.html'
         context = {
              "time": time.ctime(),

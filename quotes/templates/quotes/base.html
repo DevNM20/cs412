@@ -1,22 +1,33 @@
+<!-- File: base.html.py-->
+<!--Author: Nathan Moges (bmoges18@bu.edu), 9/12/2025-->
+ <!--Description: This is my base.html file which will be 
+ used as my parent file for the other html files and 
+ it has my footer, nav bar and title of my webpage-->
+
 {% load static %}
 <html>
     <head>
         <title>Monkey D. Luffy Quote of the Day</title>
+        <!--Link to css file for design-->
         <link rel="stylesheet" href="{% static 'styles.css' %}">
     </head>
     <body>
         <nav>
+             <!--These are the URLs on the nav bar to 
+             guide the userrs to the other pages-->
             <li><a href="{% url 'home_page' %}">Home</a></li>
             <li><a href="{% url 'about_page' %}">About</a></li>
             <li><a href="{% url 'show_all_page' %}">Show_All</a></li>
         </nav>
-        <!-- put page specific content here -->
         <main>
+        <!--Placeholder so that other files can add other content
+         past this line when their extending this base.html file-->
          {% block content %}
          {% endblock %}
         </main>
     <footer>
         <p>
+            <!--Created a footer with my email and the live time-->
             Page created by bmoges18@bu.edu <br>
             Generated at: {{time}} <br>
         </p>

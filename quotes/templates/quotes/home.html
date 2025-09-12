@@ -1,7 +1,13 @@
+<!-- File: home.html.py-->
+<!--Author: Nathan Moges (bmoges18@bu.edu), 9/12/2025-->
+ <!--Description: This is my home.html file which is also an extension of the base.html. This file puts a random picture
+ of luffy with a random quote as well. -->
+
 {% extends 'quotes/base.html' %}
         {% block content %}
       <div class="content">
         <h1>Monkey D. Luffy Quote of the Day</h1>
+        <!--Uses template variable that we defined in the views folder to randomize an image and quote-->
         <img class="luffyimg" src="{{randomimage}}">
         <p class="p">{{randomquote}}</p>
       </div>

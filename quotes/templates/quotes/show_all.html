@@ -1,14 +1,18 @@
+<!-- File: show_all.html.py-->
+<!--Author: Nathan Moges (bmoges18@bu.edu), 9/12/2025-->
+ <!--Description: This is my show_all.html file which is also an extension of the base.html. This file displays all the quotes and images.-->
+
 {% extends 'quotes/base.html' %}
 {% load static %}
 
 {% block content %}
         <h1>Monkey D. Luffy Quote of the Day</h1> <br>
         <h2>All quotes by Monkey D. Luffy</h2><br>
-
+        <!--Use a loop to loop through all the images and display them-->
         {% for quote in totalquotes %}
             <p class="p">{{ quote }}</p>
         {% endfor %}
-    
+        <!--Use a loop to loop through all the quotes and display them-->
         {% for image in totalimages %}
             <img class="luffyimg" src="{{ image }}">
         {% endfor %}
