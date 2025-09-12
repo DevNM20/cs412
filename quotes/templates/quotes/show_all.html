@@ -11,11 +11,8 @@
     </ul>
 
     <ul>
-        <img class="luffyimg" src="https://i.pinimg.com/736x/3b/9d/50/3b9d50a32ed833d9cdc73978e98c8fc2.jpg"></img>
-        <img class="luffyimg" src="https://images4.alphacoders.com/135/1352902.jpeg"></img>
-        <img class="luffyimg" src="https://media.tenor.com/qg8lImmxa_sAAAAe/one-piece-monkey-d-luffy.png"></img>
-        <img class="luffyimg" src="https://miro.medium.com/v2/resize:fit:1400/format:webp/1*YqfVlyCe06DfcPsR3kpYrw.jpeg"></img>
+        {% for image in totalimages %}:
+        <img class="luffyimg" src="{{totalimages}}"></img>
     </ul>
-        <img class="luffyimg" >
-        {% endblock %}
+{% endblock %}
 

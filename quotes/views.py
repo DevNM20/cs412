@@ -23,9 +23,6 @@ QUOTES = [
 ]
 # Create your views here.
 
-def home(request):
-    return HttpResponse("412 project")
-
 def home_page(request):
         '''Respond to the URL '', delegate work to a template.'''
 
