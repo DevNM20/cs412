@@ -30,13 +30,13 @@ QUOTES = [
 
 def home_page(request):
     '''Respond to the URL 'show_all', delegate work to a template.'''
-        template_name = 'quotes/home.html'
-        context = {
-             "time": time.ctime(),
-            "randomquote": random.choice(QUOTES),
-            "randomimage": random.choice(IMAGES),
-        }
-        return render(request, template_name, context)
+    template_name = 'quotes/home.html'
+    context = {
+        "time": time.ctime(),
+        "randomquote": random.choice(QUOTES),
+        "randomimage": random.choice(IMAGES),
+    }
+    return render(request, template_name, context)
 def show_all(request):
     '''Respond to the URL 'show_all', delegate work to a template.'''
     ""

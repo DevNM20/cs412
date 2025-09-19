@@ -1,0 +1,29 @@
+{% extends 'restaurant/base.html' %}
+
+{% block content %}
+<div>
+    <p>What would you like to order?</p>
+
+    <form action="{% url 'restaurant:confirmation' %}" method="POST">
+        {% csrf_token %}
+        <label><input type="checkbox" name="combo" value= "pancake, 7.99"> Pancakes - $7.99</label><br> 
+        <label><input type="checkbox" name="combo" value="frenchtoast, 9.99"> French Toast - $9.99</label><br>
+        <label><input type="checkbox" name="combo" value = "cereal, 3.99"> Cereal - $3.99</label><br>
+        <label><input type="checkbox" name="combo" value = "eggs, 5.99"> Eggs - $5.99</label><br>
+        <br>
+
+        <h2>Today’s Daily Special</h2>
+        <label>
+          <input type="checkbox" name="special" value="{{ daily_special.name }}, {{ daily_special.price }}">
+          {{ daily_special.name }} : ${{ daily_special.price }}
+        </label><br>
+
+        <h3>Customer Information</h3>
+        <label for="customer_name">Name: <input type ="text" name="name"></label> <br>
+        <label for="customer_phone">Phone: <input type ="text" name="phone_number"></label> <br>
+        <label for="customer_email">Email: <input type ="text" name="email"></label> <br>
+        <input type="submit">
+    </form>
+</div>
+
+{% endblock %}

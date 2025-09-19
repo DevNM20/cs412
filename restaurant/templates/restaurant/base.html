@@ -1,0 +1,17 @@
+{% load static %}
+
+<html>
+    <head>
+        <title>Restaurant</title>
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
+    </head>
+    <body>
+        <h1>Welcome to Nate's Diner!</h1>
+        <nav>
+            <li><a href="{% url 'restaurant:show_main' %}">Main Page</a></li>
+            <li><a href="{% url 'restaurant:order' %}">Order Page</a></li>
+        </nav>
+        {% block content %}
+        {% endblock content %}
+    </body>
+</html>

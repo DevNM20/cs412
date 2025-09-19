@@ -1,0 +1,20 @@
+<!--restaurant/templates/restaurant/confirmation.html-->
+{% extends 'formdata/base.html' %}
+{% block content %}
+<div>
+    <h1>Confirmation Page</h1>
+
+    <p>Thank you for your order!</p>
+
+    <p>Your food will be ready at: {{readytime}}</p> <!--Add time to get live time ask TA-->
+
+    <p>Total: </p> <!--Fix confirmation first and add total variable-->
+    <p>{{total}}</p>
+
+    <h3>Customer Information</h3> <!--Figure out how to get textboxes, extract the info, and paste it here-->
+    <p>{{name}}</p>
+    <p>{{email}}</p>
+    <p>{{phone_number}}</p>
+
+</div>
+{% endblock %}
