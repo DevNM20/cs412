@@ -1,6 +1,6 @@
 body {
     background-color: white;
-    color: slategray;
+    color: slategray!important;
     font-family: arial;
     
 }
@@ -34,6 +34,7 @@ body {
     max-width: 960px;
     margin: 20px auto;
     padding: 20px auto;
+    background-color: rgb(255, 255, 255);
 }
 
 header {
@@ -216,7 +217,10 @@ nav button {
     text-align: center;
 }
 
-
+.natedinerimg {
+    text-align: center; 
+    margin: 20px 0;        
+}
 /* responsive styles when width is less than 1400px */
 @media screen and (max-width: 560px) {
     header h1 {
@@ -241,5 +245,7 @@ nav button {
     /* on mobile, display image as max 95% of available width*/
     img {
         max-width: 95%;
+        display: block;
+        margin: 0 auto;
     }
 }

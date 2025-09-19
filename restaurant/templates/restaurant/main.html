@@ -1,11 +1,13 @@
+<!--File: main.html-->
+<!--Author: Nathan Moges (bmoges18@bu.edu)-->
+<!--Description: The main.html page displays the restaurant 
+logo and has the nav bar that guides customers to the order page-->
+
 {% extends 'restaurant/base.html' %}
 
-<head>
-    <body>
-        {% block content %}
-        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT2N0kZK9y3f-V61vWKdkdmeTHvhbz1EJ4Dw&s">
-        <p>Welcome to Nate's Diner, one of the best diners in the country!</p>
-        {% endblock %}
-    </body>
-</head>
-
+{% block content %}
+<div class="natedinerimg">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT2N0kZK9y3f-V61vWKdkdmeTHvhbz1EJ4Dw&s" alt="Nate's Diner Logo">
+</div>
+<p>Welcome to Nate's Diner, one of the best diners in the country!</p>
+{% endblock %}

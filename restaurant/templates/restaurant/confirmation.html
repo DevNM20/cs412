@@ -1,4 +1,10 @@
-<!--restaurant/templates/restaurant/confirmation.html-->
+<!--File: confirmation.html-->
+<!--Author: Nathan Moges (bmoges18@bu.edu)-->
+<!--Description: This file confirmation.html 
+takes in what the customer ordered and 
+displays the customer info and their total similar to a receipt-->
+
+
 {% extends 'formdata/base.html' %}
 {% block content %}
 <div>
@@ -6,12 +12,12 @@
 
     <p>Thank you for your order!</p>
 
-    <p>Your food will be ready at: {{readytime}}</p> <!--Add time to get live time ask TA-->
+    <p>Your food will be ready at: {{readytime}}</p> 
 
-    <p>Total: </p> <!--Fix confirmation first and add total variable-->
+    <p>Total: </p> 
     <p>{{total}}</p>
 
-    <h3>Customer Information</h3> <!--Figure out how to get textboxes, extract the info, and paste it here-->
+    <h3>Customer Information</h3> 
     <p>{{name}}</p>
     <p>{{email}}</p>
     <p>{{phone_number}}</p>

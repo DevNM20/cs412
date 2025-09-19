@@ -1,3 +1,7 @@
+# File: urls.py
+# Author: Nathan Moges (bmoges18@bu.edu) 9/19/2025
+# Description: This file urls.py has maps the specific 
+#paths of main, order, and confirmation pages
 
 from django.urls import path
 from django.conf import settings 
