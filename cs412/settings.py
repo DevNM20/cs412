@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     "hw", # NEW
     "quotes", #Assignment1
     "formdata", #Assignment2prelecture
-    "restaurant",
+    "restaurant", #Assignment2
+    "blog", #Assignment3prelecture
+    "mini_insta", #Assignment3
 ]
 
 MIDDLEWARE = [
