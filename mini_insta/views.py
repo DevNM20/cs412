@@ -1,3 +1,8 @@
+#File: views.py
+# Author: Nathan Moges (bmoges18@bu.edu) 9/26/2025
+# Description: This file views.py has two classes one of them being 
+# provide us all the Profile objects and the other class displays the Profile
+
 from django.shortcuts import render
 from django.views.generic import ListView, DetailView
 from .models import Profile

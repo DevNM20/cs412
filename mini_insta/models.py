@@ -1,4 +1,7 @@
 from django.db import models
+#File: models.py
+#Author: Nathan Moges (bmoges18@bu.edu) 9/26/25
+#Description: The mode.py creaes the profile model and stores the user's info
 
 # Create your models here.
 class Profile(models.Model):

@@ -1,4 +1,9 @@
-#mini_insta/urls.py
+# File: urls.py
+# Author: Nathan Moges (bmoges18@bu.edu) 9/26/2025
+# Description: This file urls.py maps the specific 
+# paths of the show all profiles page, and the 
+# individual one piece characters using the primary keys
+
 from django.urls import path
 from .views import ProfileListView, ProfileDetailView
 urlpatterns = [
