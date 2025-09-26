@@ -4,7 +4,7 @@ from .models import Article
 import random
 # Create your views here.
 class ShowAllView(ListView):
-    '''Define a view class to show allblog Articles.'''
+    '''Define a view class to show all blog Articles.'''
 
     model = Article
     template_name = "blog/show_all.html"
