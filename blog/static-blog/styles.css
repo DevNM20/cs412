@@ -1,10 +1,8 @@
 body {
-    background-color: white;
+    background-color: #000000;
     color: slategray;
     font-family: arial;
-    max-width: 960px;
-    margin: 20px auto;
-    padding: 100px 20px 20px 20px;
+    
 }
 
 h1,h2,h3,h4,h5{
@@ -13,9 +11,6 @@ h1,h2,h3,h4,h5{
     background:aliceblue;
     margin: 0;
     font-size: 48px;
-    max-width: 960px;
-    margin: 20px auto;
-    padding: 20px auto;
 }
 
 p {
@@ -35,51 +30,49 @@ a:hover {
     /* font-weight: bold; */
 }
 
-header {
-    position: fixed;   
-    top: 0;           
-    left: 0;           
-    right: 0;          
-    height: 80px;     
-    width: 100%;      
-    background: aliceblue;
-    z-index: 1000;     
-    display: flex;     
-    align-items: center;
-    justify-content: center;
+body {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 20px auto;
 }
 
+header {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background:aliceblue;
+    position: fixed;
+    top: 0px;
+    z-index: 999;
+    /* padding-right: 50px auto; */
+}
 
 footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
     text-align: center;
     width: 100%;
     background:aliceblue;
     bottom: 0px;
-    padding: 0px;
 }
 
 img {
     display: block;       
     margin-left: auto;   
     margin-right: auto;  
-    width: 400px;         
-}
-
-.straw-hat-home {
-    width: 100px;
+    width: 200px;         
 }
 
 
-.wrapper {              
+.wrapper {              /* centering and margin around whole wrapper element */
     border: 2px solid;
     max-width: 100%;
     position: relative;
-    top: 80px;
+    top: 50px;
     scroll-padding-top: 100px;
+    /* scroll-padding-bottom: 100px; */
     padding-bottom: 50px;
+    
+    /* top:100px; */
+    /* bottom: 100px; */
 }
 
 
@@ -100,7 +93,7 @@ div.wrapper h2 {
 
 
 section {
-    border: 2px solid darkblue;    
+    border: 2px solid darkblue;    /* border around each event */
     position: relative;
     padding-bottom: 4px;
 }

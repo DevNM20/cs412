@@ -3,11 +3,23 @@
 <html>
     <head>
         <title>Form Data</title>
-        <link rel="stylesheet" href="{% static 'styles.css' %}"
+        <link rel="stylesheet" href="{% static 'styles.css' %}">
     </head>
 
     <body>
+        <header>
+            <h1>One Piece Mini Insta</h1>
+        </header>
+
         {% block content %}
         {% endblock content %}
+
+        <footer>
+            <a href="{% url 'show_all_profiles' %}">
+                <img class="straw-hat-home"
+                     src="https://preview.redd.it/which-straw-hat-jolly-roger-do-you-like-the-most-mine-is-v0-2s3l0rbbt8qb1.jpg?width=640&crop=smart&auto=webp&s=2753a0f8e59adcd8060569186e3b8e848413c51a"
+                     alt="straw hat logo home button">
+            </a>
+        </footer>
     </body>
 </html>

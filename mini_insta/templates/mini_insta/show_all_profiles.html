@@ -2,14 +2,15 @@
 {% extends "mini_insta/base.html" %}
 
 {% block content %}
-<h1>One Piece Mini Insta</h1>
 
 <main class="grid-container">
     <!--scriplet code for a for loop-->
     {% for profile in profiles %}
     <article>
         <div>
+            <a href="{% url 'show_profile' profile.pk %}">
             <img src="{{profile.profile_image_url}}" alt="{{profile.display_name}}">
+            </a>
         </div>
     </article>
     <hr>
