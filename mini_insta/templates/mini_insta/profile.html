@@ -11,13 +11,30 @@ profile with their username, display name, bio, and their join date-->
 <p>{{profile.bio_text}}</p>
 <p>{{profile.join_date}}</p>
 
-
 <main class="grid-container">
-    <p>Posts: TBD</p>
-    <p>Followers: TBD</p>
-    <p>Following: TBD</p>
     <div>
-        <img src="{{profile.profile_image_url}}" alt="{{profile.display_name}}">
+        <img src="{{ profile.profile_image_url }}" alt="{{ profile.display_name }}">
     </div>
+
+    <h2>Posts</h2>
+
+        <div class="posts-grid">
+            {% for post in profile.get_all_posts %}
+                <div class="post-card">
+                    {% if post.get_all_photos %}
+                        <img src="{{ post.get_all_photos.0.image_url }}" alt="Post photo">
+                    {% else %}
+                        <img src="https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg" alt="No image">
+                    {% endif %}
+                    <p>{{ post.caption }}</p>
+                    <small>Posted at {{ post.timestamp }}</small>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No posts</p>
+    {% endif %}
 </main>
 {% endblock %}
+
+
