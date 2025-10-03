@@ -20,17 +20,21 @@ profile with their username, display name, bio, and their join date-->
 
     <div class="posts-grid">
         {% for post in profile.get_all_posts %}
-            <div class="post-card">
-                {% if post.get_all_photos %}
-                    <img src="{{ post.get_all_photos.0.image_url }}" alt="Post photo">
+            {% with post.get_all_photos.first as first_photo %}
+                {% if first_photo %}
+                    <a href="{% url 'show_post' post.pk %}">
+                        <img class="post-photo" src="{{ first_photo.image_url }}" alt="Post photo">
+                    </a>
                 {% else %}
-                    <img src="https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg" alt="No image">
+                    <a href="{% url 'show_post' post.pk %}">
+                        <img class="post-photo" src="https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg" alt="No image">
+                    </a>
                 {% endif %}
+            {% endwith%}
+            <div class="post-card">
                 <p>{{ post.caption }}</p>
                 <small>Posted at {{ post.timestamp }}</small>
             </div>
-        {% empty %}
-            <p>No posts</p>
         {% endfor %}
     </div>
 </main>

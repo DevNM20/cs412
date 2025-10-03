@@ -53,5 +53,9 @@ class Photo(models.Model):
     image_url = models.TextField(blank=True)
     timestamp = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        '''Return a string representation of the Post model instance.'''
+        return f"Here is my post : {self.post}, image_url : {self.image_url}, and what time I posted : {self.timestamp}"
+
 
 

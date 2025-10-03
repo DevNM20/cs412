@@ -1,0 +1,25 @@
+{% extends "mini_insta/base.html" %}
+
+{% block content %}
+<h1>Post by {{ post.profile.display_name }} ({{ post.profile.username }})</h1>
+
+<div class="post-detail">
+    <p><strong>Caption:</strong> {{ post.caption }}</p>
+    <p><strong>Posted at:</strong> {{ post.timestamp }}</p>
+</div>
+
+<h2>Photos</h2>
+<div class="posts-grid">
+    {% for photo in post.get_all_photos %}
+        <div class="post-card">
+                {% if post.get_all_photos %}
+                    <img class="post-photo" src="{{ photo.image_url }}" alt="Post photo">
+                {% else %}
+                    <img class="post-photo" src="https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg" alt="No image">
+                {% endif %}
+            <p>{{ post.caption }}</p>
+            <small>Posted at {{ post.timestamp }}</small>
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}

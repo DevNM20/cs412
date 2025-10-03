@@ -1,0 +1,20 @@
+<!-- mini_insta/create_post_form.html 
+ display the HTML form to create a new post on a Post object.-->
+ {% extends 'mini_insta/base.html' %}
+
+ {% block content %}
+ 
+ <!--Display thr HTML Form-->
+ <h1>Create a new Post on {{profile.username}}</h1>
+ <form method="POST" action="{% url 'create_post' profile.pk %}">
+     {% csrf_token %}
+
+     <table> {{form.as_table}} </table>
+     <label>Image URL:</label>
+     <input type="text", name="image_url"><br>
+     <input type="submit" name="submit" value="Submit">
+     <a href="{% url 'show_profile' profile.pk %}">
+        <button type="button">Cancel</button>
+    </a>
+ </form>
+ {% endblock %}
