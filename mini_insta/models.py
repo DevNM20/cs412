@@ -42,6 +42,7 @@ class Post(models.Model):
         return f"Here is my profile : {self.profile}, my caption : {self.caption}, and what time I posted : {self.timestamp}"
 
     def get_all_photos(self):
+        '''This accessor method will get all the photo objects that is specific to one profile'''
         photos = Photo.objects.filter(post=self)
         return photos
 

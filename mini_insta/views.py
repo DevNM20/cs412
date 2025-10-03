@@ -31,6 +31,7 @@ class PostDetailView(DetailView):
     context_object_name = "post"
 
 class CreatePostView(CreateView):
+    '''This view is used to make a new Post object.'''
     model = Post 
     form_class = CreatePostForm
     template_name = "mini_insta/create_post_form.html"
