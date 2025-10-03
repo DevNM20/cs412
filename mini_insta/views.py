@@ -18,7 +18,7 @@ class ProfileDetailView(DetailView):
     '''Display a single Profile.'''
 
     model = Profile
-    template_name = "mini_insta/profile.html"
+    template_name = "mini_insta/show_profile.html"
     context_object_name = "profile"
 
 class PostDetailView(DetailView):

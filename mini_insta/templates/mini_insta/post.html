@@ -1,0 +1,19 @@
+{% extends "mini_insta/base.html" %}
+
+{% block content %}
+<h1>Post by {{ post.profile.display_name }} ({{ post.profile.username }})</h1>
+
+<div class="post-detail">
+    <p><strong>Caption:</strong> {{ post.caption }}</p>
+    <p><strong>Posted at:</strong> {{ post.timestamp }}</p>
+</div>
+
+<h2>Photos</h2>
+<div class="photos-grid">
+    {% for photo in post.get_all_photos %}
+        <div class="photo-card">
+            <img src="{{ photo.image_url }}" alt="Photo for post">
+        </div>
+    {% endfor %}
+</div>
+{% endblock %}
