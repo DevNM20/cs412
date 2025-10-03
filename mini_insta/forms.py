@@ -1,3 +1,7 @@
+# File: forms.py
+# Author: Nathan Moges (bmoges18@bu.edu) 10/3/2025
+# Description: The file forms.py defines the forms that we will use for create/update/delete operations
+
 from django import forms
 from .models import *
 

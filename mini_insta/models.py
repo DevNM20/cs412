@@ -1,7 +1,8 @@
-from django.db import models
 #File: models.py
-#Author: Nathan Moges (bmoges18@bu.edu) 9/26/25
-#Description: The mode.py creates the profile model and stores the user's info
+#Author: Nathan Moges (bmoges18@bu.edu) 10/3/25
+#Description: The model.py creates the profile model and stores the user's info
+
+from django.db import models
 
 # Create your models here.
 class Profile(models.Model):
