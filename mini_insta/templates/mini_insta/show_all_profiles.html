@@ -12,6 +12,8 @@ on the image it will take you to their individual pages.-->
     {% for profile in profiles %}
     <article>
         <div>
+            <p>{{profile.username}}</p>
+            <p>{{profile.display_name}}</p>
             <a href="{% url 'show_profile' profile.pk %}">
             <img class="profile-img" src="{{profile.profile_image_url}}" alt="{{profile.display_name}}">
             </a>

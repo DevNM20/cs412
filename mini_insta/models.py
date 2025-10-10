@@ -77,7 +77,7 @@ class Photo(models.Model):
 
     def __str__(self):
         '''Return a string representation of the Post model instance.'''
-        return f"Here is my post : {self.post}, image_url : {self.image_url}, and what time I posted : {self.timestamp}, the URL is: {self.image_url}"
+        return f"Here is my post : {self.post}, image_url : {self.get_image_url}, and what time I posted : {self.timestamp}, the URL is: {self.get_image_url}"
 
 
 
