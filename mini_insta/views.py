@@ -121,7 +121,7 @@ class DeletePostView(DeleteView):
         return reverse('show_profile', kwargs={'pk': self.object.profile.pk})
     
     def get_context_data(self, **kwargs):
-
+        '''Return the dictionary of context variables for use in the template.'''
         context = super().get_context_data(**kwargs)
 
         pk = self.kwargs['pk']
