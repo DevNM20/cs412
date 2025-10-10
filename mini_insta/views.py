@@ -4,10 +4,10 @@
 # which are the ListView, DetaileView, and CreateView
 
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse
 from .models import Profile, Post, Photo
-from .forms import CreatePostForm
+from .forms import CreatePostForm, UpdateProfileForm
 # Create your views here.
 class ProfileListView(ListView):
     '''Defined a view class to show all Profiles.'''
@@ -83,5 +83,9 @@ class CreatePostView(CreateView):
         # call reverse to generate the URL for this Post
         return reverse('show_profile', kwargs={'pk': pk})
 
+class UpdateProfileView(UpdateView):
+    '''View class to handle update of a Profile based on its PK.'''
+    model = Profile
+    form_class = UpdateProfileForm
+    template_name = "mini_insta/update_profile_form.html"
 
-    

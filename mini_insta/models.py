@@ -3,6 +3,7 @@
 #Description: The model.py creates the profile model and stores the user's info
 
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class Profile(models.Model):
@@ -24,6 +25,10 @@ class Profile(models.Model):
         '''Return a QuerySet of posts for this profile.''' 
         posts = Post.objects.filter(profile=self) 
         return posts    
+    
+    def get_absolute_url(self):
+        '''Return a URL to display one instance of this model.'''
+        return reverse('show_profile', kwargs={'pk': self.pk})
 
 
 
