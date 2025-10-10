@@ -23,7 +23,7 @@ profile with their username, display name, bio, and their join date-->
             {% with post.get_all_photos.first as first_photo %}
                 {% if first_photo %}
                     <a href="{% url 'show_post' post.pk %}">
-                        <img class="post-photo" src="{{ first_photo.image_url }}" alt="Post photo">
+                        <img class="post-photo" src="{{ first_photo.get_image_url }}" alt="Post photo">
                     </a>
                 {% else %}
                     <a href="{% url 'show_post' post.pk %}">

@@ -10,7 +10,8 @@ class Article(models.Model):
     author = models.TextField(blank=True)
     text = models.TextField(blank=True)
     published = models.DateTimeField(auto_now=True)
-    image_url = models.URLField(blank=True)
+    # image_url = models.URLField(blank=True) # url as a string
+    image_file = models.ImageField(blank=True) # an actual image
     
     def __str__(self):
         '''return a string representation of this model instance.'''
@@ -24,6 +25,16 @@ class Article(models.Model):
         '''Return a QuerySet of comments about this article.'''
         comments = Comment.objects.filter(article=self)
         return comments
+
+    def get_image_url(self):
+        '''Return the URL to this photo’s image.'''
+        if self.image_url:
+            return self.image_url
+        elif self.image_file:
+            return self.image_file.url
+        else:
+            return ''
+        
 
 class Comment(models.Model):
     '''Encapsulates the idea of a Comment about an Article.'''

@@ -66,8 +66,12 @@ class CreatePostView(CreateView):
 
         post = form.save()
 
-        image_url = self.request.POST.get('image_url')
-        Photo.objects.create(post=post, image_url=image_url)
+        # image_url = self.request.POST.get('image_url')
+        # Photo.objects.create(post=post, image_url=image_url)
+
+        files = self.request.FILES.getlist('files')   # "files" matches <input name="files">
+        for f in files:
+            Photo.objects.create(post=post, image_file=f)
 
         # delegate the work to the superclass method form_valid:
         return super().form_valid(form)

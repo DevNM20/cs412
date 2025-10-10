@@ -17,8 +17,8 @@ the caption and timestamp of the individual posts of a profile-->
 <div class="posts-grid">
     {% for photo in post.get_all_photos %}
         <div class="post-card">
-                {% if post.get_all_photos %}
-                    <img class="post-photo" src="{{ photo.image_url }}" alt="Post photo">
+                {% if photo.get_image_url %}
+                    <img class="post-photo" src="{{ photo.get_image_url }}" alt="Post photo">
                 {% else %}
                     <img class="post-photo" src="https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg" alt="No image">
                 {% endif %}

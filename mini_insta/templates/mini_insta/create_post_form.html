@@ -6,16 +6,14 @@
  {% block content %}
  
  <!--Display thr HTML Form-->
- <h1>Create a new Post on {{profile.username}}</h1>
- <form method="POST" action="{% url 'create_post' profile.pk %}">
-     {% csrf_token %}
-
-     <table> {{form.as_table}} </table>
-     <label>Image URL:</label>
-     <input type="text", name="image_url"><br>
-     <input type="submit" name="submit" value="Submit">
-     <a href="{% url 'show_profile' profile.pk %}">
+ <form method="POST" action="{% url 'create_post' profile.pk %}" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_table }}<br><br>
+    <label for="files">Select Photos:</label>
+    <input type="file" id="files" name="files" multiple><br><br>
+    <button type="submit">Post</button>
+    <a href="{% url 'show_profile' pk=profile.pk %}">
         <button type="button">Cancel</button>
     </a>
- </form>
+</form>
  {% endblock %}
