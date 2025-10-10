@@ -4,10 +4,10 @@
 # which are the ListView, DetaileView, and CreateView
 
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import *
 from django.urls import reverse
 from .models import Profile, Post, Photo
-from .forms import CreatePostForm, UpdateProfileForm
+from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm
 # Create your views here.
 class ProfileListView(ListView):
     '''Defined a view class to show all Profiles.'''
@@ -36,7 +36,7 @@ class CreatePostView(CreateView):
     form_class = CreatePostForm
     template_name = "mini_insta/create_post_form.html"
 
-    def get_context_data(self):
+    def get_context_data(self, **kwargs):
         '''Return the dictionary of context variables for use in the template.'''
 
         #calling the superclass method
@@ -60,7 +60,7 @@ class CreatePostView(CreateView):
         print(form.cleaned_data)
         #retrieve the PK from the URL pattern
         pk = self.kwargs['pk']
-        profile = Profile.objects.get(pk=pk)
+        profile = Profile.objects.get.filter(pk=pk)
         #attach this post to the profile
         form.instance.profile = profile
 
@@ -88,4 +88,53 @@ class UpdateProfileView(UpdateView):
     model = Profile
     form_class = UpdateProfileForm
     template_name = "mini_insta/update_profile_form.html"
+
+class UpdatePostView(UpdateView):
+    '''View class to handle update of a Post based on its PK.'''
+    model = Post
+    form_class = UpdatePostForm
+    template_name = "mini_insta/update_post_form.html"
+
+    def get_context_data(self, **kwargs):
+        '''Return the dictionary of context variables for use in the template.'''
+
+        context = super().get_context_data(**kwargs)
+        pk = self.kwargs['pk']
+        post = Post.objects.get(pk=pk)
+
+        profile = Profile.objects.get(pk=self.object.profile.pk)
+
+        context['post'] = post
+        context['profile'] = profile
+
+        return context
+
+class DeletePostView(DeleteView):
+    '''View class to delete a Post on an Profile.'''
+    model = Post
+    template_name = 'mini_insta/delete_post_form.html'
+
+    def get_success_url(self):
+        '''Return the URL to redirect to after a successful delete.'''
+
+        #return the URL to redirect to:
+        return reverse('show_profile', kwargs={'pk': self.object.profile.pk})
+    
+    def get_context_data(self, **kwargs):
+
+        context = super().get_context_data(**kwargs)
+
+        pk = self.kwargs['pk']
+        post = Post.objects.get(pk=pk)
+
+        profile = Profile.objects.get(pk=self.object.profile.pk)
+
+        context['post'] = post
+        context['profile'] = profile
+
+        return context
+
+
+
+    
 

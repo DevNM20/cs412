@@ -11,6 +11,12 @@ the caption and timestamp of the individual posts of a profile-->
 <div class="post-detail">
     <p><strong>Caption:</strong> {{ post.caption }}</p>
     <p><strong>Posted at:</strong> {{ post.timestamp }}</p>
+    <a href="{% url 'update_post' post.pk %}">
+        <button type="button">Update Post</button>
+    </a>
+    <a href="{% url 'delete_post' post.pk %}">
+        <button type="button">Delete Post</button>
+    </a>
 </div>
 
 <h2>Photos</h2>

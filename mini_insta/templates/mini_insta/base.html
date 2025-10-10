@@ -7,31 +7,30 @@ header and footer to the rest of the pages-->
 {% load static %}
 
 <html>
-    <head>
-        <title>Form Data</title>
-        <link rel="stylesheet" href="{% static 'styles.css' %}">
-    </head>
 
-    <body>
-        <header>
-            <h1>One Piece Mini Insta</h1>
-        </header>
+<head>
+    <title>Form Data</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
 
-        {% block content %}
-        {% endblock content %}
+<body>
+    <header>
+        <h1>One Piece Mini Insta</h1>
+    </header>
 
-        <footer>
-            <nav>        
-                {% if profile %}
-                    <a class="add" href="{% url 'create_post' profile.pk %}"><img src="https://media.istockphoto.com/id/688550958/vector/black-plus-sign-positive-symbol.jpg?s=612x612&w=0&k=20&c=0tymWBTSEqsnYYXWeWmJPxMotTGUwaGMGs6BMJvr7X4="></a>
-                    <a class="update" href="{% url 'update_profile' profile.pk %}"><img src="https://static.vecteezy.com/system/resources/thumbnails/012/827/604/small_2x/update-symbol-icon-free-vector.jpg"></a>
-                {% endif %}
-            </nav>
-            <a href="{% url 'show_all_profiles' %}">
-               <img class="straw-hat-home"
-                     src="https://preview.redd.it/which-straw-hat-jolly-roger-do-you-like-the-most-mine-is-v0-2s3l0rbbt8qb1.jpg?width=640&crop=smart&auto=webp&s=2753a0f8e59adcd8060569186e3b8e848413c51a"
-                     alt="straw hat logo home button">  <!--Straw hat logo as the home button in the footer-->
-            </a>
-        </footer>
-    </body>
+    {% block content %}
+    {% endblock content %}
+    <nav>
+        {% if profile %}
+        <a class="add" href="{% url 'create_post' profile.pk %}"><img
+                src="https://media.istockphoto.com/id/688550958/vector/black-plus-sign-positive-symbol.jpg?s=612x612&w=0&k=20&c=0tymWBTSEqsnYYXWeWmJPxMotTGUwaGMGs6BMJvr7X4="></a>
+        {% endif %}
+    </nav>
+    <a href="{% url 'show_all_profiles' %}">
+        <img class="straw-hat-home"
+            src="https://preview.redd.it/which-straw-hat-jolly-roger-do-you-like-the-most-mine-is-v0-2s3l0rbbt8qb1.jpg?width=640&crop=smart&auto=webp&s=2753a0f8e59adcd8060569186e3b8e848413c51a"
+            alt="straw hat logo home button"> <!--Straw hat logo as the home button in the footer-->
+    </a>
+</body>
+
 </html>

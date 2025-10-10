@@ -1,0 +1,20 @@
+<!-- mini_insta/update_article_form.html -->
+ <!--Display the HTML form to update an Article object.-->
+ {% extends 'mini_insta/base.html' %}
+
+ {% block content %}
+ 
+ <!--Display thr HTML Form-->
+ <h1>Update this Post</h1>
+ <form action="{% url 'update_post' post.pk %}" method="POST"
+     enctype="multipart/form-data">
+     {% csrf_token %}
+     <table> {{form.as_table}} </table>
+     <input type="submit" name="submit" value="Update">
+ </form>
+ 
+ <form action="{% url 'show_post' profile.pk %}" method="GET">
+     
+     <input type="submit" value="Cancel">
+ </form>
+ {% endblock %}

@@ -51,6 +51,10 @@ class Post(models.Model):
         photos = Photo.objects.filter(post=self)
         return photos
 
+    def get_absolute_url(self):
+        '''Return a URL to display one instance of this model.'''
+        return reverse('show_post', kwargs={'pk': self.pk})
+
 class Photo(models.Model):
     '''The photo model will model all the data attributes that are associated with the image that you will be posting.'''
 

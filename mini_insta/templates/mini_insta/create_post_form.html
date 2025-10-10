@@ -12,7 +12,7 @@
     <label for="files">Select Photos:</label>
     <input type="file" id="files" name="files" multiple><br><br>
     <button type="submit">Post</button>
-    <a href="{% url 'show_profile' pk=profile.pk %}">
+    <a href="{% url 'show_profile' profile.pk %}">
         <button type="button">Cancel</button>
     </a>
 </form>
