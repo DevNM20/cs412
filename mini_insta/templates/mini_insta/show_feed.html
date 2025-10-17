@@ -1,0 +1,44 @@
+<!--File: show_feed.html-->
+<!--Author: Nathan Moges (bmoges18@bu.edu) 10/16/25-->
+<!--Description: -->
+{% extends "mini_insta/base.html" %}
+
+{% block content %}
+<h1>{{ profile.display_name }}'s Feed</h1>
+<p>Posts from profiles that {{ profile.display_name }} follows</p>
+
+<div class="feed-container">
+    {% for post in posts %}
+        <div class="feed-card">
+            <!-- Author -->
+            <div class="feed-author">
+                <img class="author-img" src="{{ post.profile.profile_image_url }}" alt="{{ post.profile.display_name }}">
+                <strong>{{ post.profile.display_name }}</strong> (@{{ post.profile.username }})
+            </div>
+            {% with post.get_all_photos.first as first_photo %}
+                {% if first_photo %}
+                    <img class="post-photo" src="{{ first_photo.get_image_url }}" alt="Post photo">
+                {% else %}
+                    <img class="post-photo" src="https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg" alt="No image">
+                {% endif %}
+            {% endwith %}
+            <p>{{ post.caption }}</p>
+            <small>Posted at {{ post.timestamp }}</small>
+            <div class="post-likes">
+                 {{ post.get_num_likes }} Likes
+            </div>
+            <div class="post-comments">
+                <h4>Comments:</h4>
+                {% for comment in post.get_all_comments %}
+                    <p><strong>{{ comment.profile.display_name }}:</strong> {{ comment.text }}</p>
+                {% empty %}
+                    <p>No comments yet.</p>
+                {% endfor %}
+            </div>
+        </div>
+    {% empty %}
+        <p>No posts in your feed yet. Follow some profiles to see their posts here!</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

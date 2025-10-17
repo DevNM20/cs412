@@ -6,7 +6,7 @@
 from django.shortcuts import render
 from django.views.generic import *
 from django.urls import reverse
-from .models import Profile, Post, Photo
+from .models import Profile, Post, Photo, Follow
 from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm
 # Create your views here.
 class ProfileListView(ListView):
@@ -15,6 +15,12 @@ class ProfileListView(ListView):
     model = Profile
     template_name = "mini_insta/show_all_profiles.html"
     context_object_name = "profiles"
+
+class PostFeedListView(ListView):
+    ''''''
+    model = Post 
+    template_name = "mini_insta/show_feed.html"
+    context_object_name = "posts"
 
 class ProfileDetailView(DetailView):
     '''Display a single Profile.'''
@@ -29,6 +35,20 @@ class PostDetailView(DetailView):
     model = Post 
     template_name = "mini_insta/show_post.html"
     context_object_name = "post"
+
+class ShowFollowersDetailView(DetailView):
+    '''Display the followers'''
+
+    model = Profile
+    template_name = "mini_insta/show_followers.html"
+    context_object_name = "profile"
+
+class ShowFollowingDetailView(DetailView):
+    '''Display your following'''
+
+    model = Profile
+    template_name = "mini_insta/show_following.html"
+    context_object_name = "profile"
 
 class CreatePostView(CreateView):
     '''This view is used to make a new Post object.'''
@@ -60,7 +80,7 @@ class CreatePostView(CreateView):
         print(form.cleaned_data)
         #retrieve the PK from the URL pattern
         pk = self.kwargs['pk']
-        profile = Profile.objects.get.filter(pk=pk)
+        profile = Profile.objects.get(pk=pk)
         #attach this post to the profile
         form.instance.profile = profile
 

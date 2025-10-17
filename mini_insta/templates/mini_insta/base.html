@@ -21,6 +21,10 @@ header and footer to the rest of the pages-->
     {% block content %}
     {% endblock content %}
     <nav>
+    {% if profile %}
+        <a href="{% url 'show_feed' profile.pk %}">Home</a>
+        <a href="{% url 'show_profile' profile.pk %}">Profile</a>
+    {% endif %}
         {% if profile %}
         <a class="add" href="{% url 'create_post' profile.pk %}"><img
                 src="https://media.istockphoto.com/id/688550958/vector/black-plus-sign-positive-symbol.jpg?s=612x612&w=0&k=20&c=0tymWBTSEqsnYYXWeWmJPxMotTGUwaGMGs6BMJvr7X4="></a>
@@ -31,6 +35,7 @@ header and footer to the rest of the pages-->
             src="https://preview.redd.it/which-straw-hat-jolly-roger-do-you-like-the-most-mine-is-v0-2s3l0rbbt8qb1.jpg?width=640&crop=smart&auto=webp&s=2753a0f8e59adcd8060569186e3b8e848413c51a"
             alt="straw hat logo home button"> <!--Straw hat logo as the home button in the footer-->
     </a>
+
 </body>
 
 </html>

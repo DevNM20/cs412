@@ -19,6 +19,8 @@ the caption and timestamp of the individual posts of a profile-->
     </a>
 </div>
 
+
+
 <h2>Photos</h2>
 <div class="posts-grid">
     {% for photo in post.get_all_photos %}
@@ -26,10 +28,11 @@ the caption and timestamp of the individual posts of a profile-->
                 {% if photo.get_image_url %}
                     <img class="post-photo" src="{{ photo.get_image_url }}" alt="Post photo">
                 {% else %}
-                    <img class="post-photo" src="https://thumb.ac-illust.com/b1/b170870007dfa419295d949814474ab2_t.jpeg" alt="No image">
+                    <img class="post-photo" src="https://thumb.ac-illust.com/bf1/b170870007dfa419295d949814474ab2_t.jpeg" alt="No image">
                 {% endif %}
             <p>{{ post.caption }}</p>
-            <small>Posted at {{ post.timestamp }}</small>
+            <p>{{ like.profile }}</p>
+            <p>{{ comment.text }}</p>
         </div>
     {% endfor %}
 </div>

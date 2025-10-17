@@ -1,0 +1,22 @@
+<!--File: show_followers.html-->
+<!--Author: Nathan Moges (bmoges18@bu.edu) 10/16/25-->
+<!--Description: -->
+{% extends "mini_insta/base.html" %}
+
+{% block content %}
+  <h2>Followers of {{ profile.display_name }} (@{{ profile.username }})</h2>
+
+  {% if follow.get_followers %}
+    <ul>
+      {% for follower in profile.get_followers %}
+        <li>
+          <a href="{{ follower.get_absolute_url }}">
+            {{ follower.display_name }} (@{{ follower.username }})
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No followers yet.</p>
+  {% endif %}
+{% endblock %}

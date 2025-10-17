@@ -1,0 +1,23 @@
+<!--File: show_following.html-->
+<!--Author: Nathan Moges (bmoges18@bu.edu) 10/16/25-->
+<!--Description: -->
+
+{% extends "mini_insta/base.html" %}
+
+{% block content %}
+  <h2>{{ profile.display_name }} (@{{ profile.username }}) is Following</h2>
+
+  {% if profile.get_following %}
+    <ul>
+      {% for following in profile.get_following %}
+        <li>
+          <a href="{{ following.get_absolute_url }}">
+            {{ following.display_name }} (@{{ following.username }})
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>This profile is not following anyone yet.</p>
+  {% endif %}
+{% endblock %}

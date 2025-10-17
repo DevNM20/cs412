@@ -14,6 +14,15 @@ profile with their username, display name, bio, and their join date-->
     <button type="button">Update</button>
 </a>
 
+<p>
+    <a href="{% url 'show_followers' profile.pk %}">
+        Followers: {{ profile.get_num_followers }}
+    </a> |
+    <a href="{% url 'show_following' profile.pk %}">
+        Following: {{ profile.get_num_following }}
+    </a>
+</p>
+
 <main class="grid-container">
     <div>
         <img src="{{ profile.profile_image_url }}" alt="{{ profile.display_name }}">

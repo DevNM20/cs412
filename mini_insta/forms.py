@@ -15,7 +15,6 @@ class CreatePostForm(forms.ModelForm):
 
 class UpdateProfileForm(forms.ModelForm):
     '''A form to handle an update to an Article.'''
-
     class Meta:
         '''Associate this form with a model in our database.'''
         model = Profile
