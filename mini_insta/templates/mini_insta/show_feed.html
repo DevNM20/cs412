@@ -1,16 +1,14 @@
 <!--File: show_feed.html-->
 <!--Author: Nathan Moges (bmoges18@bu.edu) 10/16/25-->
-<!--Description: -->
+<!--Description: This is the show feed paage which shows the content of the people who the users follow -->
 {% extends "mini_insta/base.html" %}
 
 {% block content %}
 <h1>{{ profile.display_name }}'s Feed</h1>
-<p>Posts from profiles that {{ profile.display_name }} follows</p>
 
 <div class="feed-container">
     {% for post in posts %}
         <div class="feed-card">
-            <!-- Author -->
             <div class="feed-author">
                 <img class="author-img" src="{{ post.profile.profile_image_url }}" alt="{{ post.profile.display_name }}">
                 <strong>{{ post.profile.display_name }}</strong> (@{{ post.profile.username }})
@@ -25,7 +23,8 @@
             <p>{{ post.caption }}</p>
             <small>Posted at {{ post.timestamp }}</small>
             <div class="post-likes">
-                 {{ post.get_num_likes }} Likes
+
+                    <small>{{ post.get_likes.count }} likes</small>
             </div>
             <div class="post-comments">
                 <h4>Comments:</h4>
@@ -37,8 +36,9 @@
             </div>
         </div>
     {% empty %}
-        <p>No posts in your feed yet. Follow some profiles to see their posts here!</p>
+        <p>No posts in your feed yet </p>
     {% endfor %}
 </div>
 
 {% endblock %}
+

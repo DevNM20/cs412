@@ -1,12 +1,10 @@
 <!--File: show_followers.html-->
 <!--Author: Nathan Moges (bmoges18@bu.edu) 10/16/25-->
-<!--Description: -->
+<!--Description: This is the show_followers page where it shows the user's followers-->
 {% extends "mini_insta/base.html" %}
 
 {% block content %}
   <h2>Followers of {{ profile.display_name }} (@{{ profile.username }})</h2>
-
-  {% if follow.get_followers %}
     <ul>
       {% for follower in profile.get_followers %}
         <li>
@@ -14,9 +12,8 @@
             {{ follower.display_name }} (@{{ follower.username }})
           </a>
         </li>
-      {% endfor %}
     </ul>
-  {% else %}
+  {% empty %}
     <p>No followers yet.</p>
-  {% endif %}
+    {% endfor %}
 {% endblock %}

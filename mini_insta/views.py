@@ -4,6 +4,7 @@
 # which are the ListView, DetaileView, and CreateView
 
 from django.shortcuts import render
+from django.db.models import Q
 from django.views.generic import *
 from django.urls import reverse
 from .models import Profile, Post, Photo, Follow
@@ -17,10 +18,80 @@ class ProfileListView(ListView):
     context_object_name = "profiles"
 
 class PostFeedListView(ListView):
-    ''''''
+    '''This is the view for the feed page'''
     model = Post 
     template_name = "mini_insta/show_feed.html"
     context_object_name = "posts"
+
+    def get_context_data(self, **kwargs):
+        '''Return the dictionary of context variables for use in the template.'''
+
+        #calling the superclass method
+        context = super().get_context_data()
+
+        #find/add the post to the context data
+        #retrieve the PK from the URL pattern
+        pk = self.kwargs['pk']
+        profile = Profile.objects.get(pk=pk)
+
+        # add this post into the context dictionary:
+        context['profile'] = profile
+        return context
+
+
+class SearchView(ListView):
+    '''Adds a search featurre to our mini-insta'''
+    model = Profile
+    template_name = "mini_insta/search_results.html"
+    context_object_name = "profiles"
+    
+    def dispatch(self, request, *args, **kwargs):
+            '''override super method to handle any request'''
+
+            pk = self.kwargs['pk']
+            profile = Profile.objects.get(pk=pk)
+
+            if 'query' not in request.GET:
+                return render(request, 'mini_insta/search.html', {'profile': profile})
+            else:
+                return super().dispatch(request, *args, **kwargs)
+
+    def get_queryset(self):
+        '''returns QuerySet of instance data for this search'''
+
+        query = self.request.GET.get('query', '')
+        return Post.objects.filter(caption__contains=query)
+
+    def get_queryset(self):
+        ''''''
+
+        query = self.request.GET.get('query', '')
+        return Post.objects.filter(caption__contains=query)
+
+    def get_context_data(self):
+        '''Return a dictionary containing context variables for use in this template'''
+        context = super().get_context_data()
+
+
+        pk = self.kwargs['pk']
+        profile = Profile.objects.get(pk=pk)
+        query = self.request.GET.get('query', '')
+
+        context['profile'] = profile
+        if query:
+
+            context['query'] = query
+            context['posts'] = self.get_queryset()
+            context['profiles'] = Profile.objects.filter(
+                Q(username__icontains=query) |
+                Q(display_name__icontains=query) |
+                Q(bio_text__icontains=query)
+            )
+
+        return context
+
+
+
 
 class ProfileDetailView(DetailView):
     '''Display a single Profile.'''

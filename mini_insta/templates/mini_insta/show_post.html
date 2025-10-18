@@ -30,9 +30,12 @@ the caption and timestamp of the individual posts of a profile-->
                 {% else %}
                     <img class="post-photo" src="https://thumb.ac-illust.com/bf1/b170870007dfa419295d949814474ab2_t.jpeg" alt="No image">
                 {% endif %}
-            <p>{{ post.caption }}</p>
-            <p>{{ like.profile }}</p>
-            <p>{{ comment.text }}</p>
+                {% for comment in post.get_all_comments %}
+                <p>{{ comment.text }}</p>
+            {% endfor %}
+            {% for like in post.get_all_likes %}
+                <p>{{ like.profile }}</p>
+            {% endfor %}
         </div>
     {% endfor %}
 </div>

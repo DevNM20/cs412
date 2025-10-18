@@ -1,0 +1,44 @@
+<!-- File: search.html -->
+<!-- Author: Nathan Moges (bmoges18@bu.edu) (10/17/25)-->
+ <!--Description: THis page shows the page results when a user searches-->
+{% extends "mini_insta/base.html" %}
+
+{% block content %}
+<h1>Search Results</h1>
+<p>Showing results for query: "{{ query }}"</p>
+
+<hr>
+
+<h3>Profiles matching the query</h3>
+{% if profiles_username or profiles_display or profiles_bio %}
+    <ul>
+        {% for p in profiles_username %}
+            <li><a href="{% url 'show_profile' p.pk %}">{{ p.display_name }} (@{{ p.username }})</a></li>
+        {% endfor %}
+        {% for p in profiles_display %}
+            <li><a href="{% url 'show_profile' p.pk %}">{{ p.display_name }} (@{{ p.username }})</a></li>
+        {% endfor %}
+        {% for p in profiles_bio %}
+            <li><a href="{% url 'show_profile' p.pk %}">{{ p.display_name }} (@{{ p.username }})</a></li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No profiles matched your search</p>
+{% endif %}
+
+<hr>
+
+<h3>Posts matching the query</h3>
+{% if posts %}
+    <ul>
+        {% for post in posts %}
+            <li>
+                <a href="{% url 'show_post' post.pk %}">{{ post.caption }}</a>
+                (by {{ post.profile.display_name }})
+            </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No posts matched your search</p>
+{% endif %}
+{% endblock %}

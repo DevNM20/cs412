@@ -33,7 +33,7 @@ class Profile(models.Model):
 
     def get_followers(self):
         """Return a list of Profiles who follow this Profile."""
-        followers = Profile.objects.filter(profile=self)
+        followers = Follow.objects.filter(profile=self)
         profile_followers = []
         for follow in followers:
             profile_followers.append(follow.follower_profile)
@@ -44,27 +44,27 @@ class Profile(models.Model):
         return len(self.get_followers())
     
     def get_following(self):
-        followers = Profile.objects.filter(follower_profile=self)
+        '''Returns the list of the users following accounts'''
+        followers = Follow.objects.filter(follower_profile=self)
         profile_followers = []
         for follow in followers:
-            profile_followers.append(follow.follower_profile)
+            profile_followers.append(follow.profile)
         return profile_followers
     
     def get_num_following(self):
+        '''Returns the length of the list of the user's following accounts'''
         return len(self.get_following())
-
+        
     def get_post_feed(self):
         """Return a QuerySet of Posts made by the Profiles this Profile follows, most recent first."""
-        from .models import Follow, Post
-        following = Follow.objects.filter(follower_profile=self)
-        followed_profiles = []
-        for f in following:
-            followed_profiles.append(f.profile)
-
-        posts = Post.objects.filter(profile__in=followed_profiles).order_by("-timestamp")
+        my_following = self.get_following()
+        posts = Post.objects.filter(profile__in=my_following).order_by("-timestamp")
         return posts
 
+        
+
 class Post(models.Model):
+    '''Model all the data attributes associated with a Post'''
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     caption = models.TextField(blank=True)
     timestamp = models.DateTimeField(auto_now=True)
@@ -85,6 +85,14 @@ class Post(models.Model):
     def get_post_feed(self):
         '''Returns a list or QuerySet of Posts specifically  for the profiles being 
         followed by the profiles on which the method was called.'''
+        following_profiles = self.get_following()  
+        posts = Post.objects.filter(profile__in=following_profiles).order_by("-timestamp")
+        return posts
+
+    def get_likes(self):
+        '''Return a QuerySet of all likes from a specific post.'''
+        likes = Like.objects.filter(post=self)
+        return likes
         
 
 class Photo(models.Model):
@@ -145,11 +153,6 @@ class Like(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)       
     profile = models.ForeignKey(Profile, on_delete=models.CASCADE) 
     timestamp = models.DateTimeField(auto_now=True) 
-
-    def get_likes(self):
-        '''Return a QuerySet of all likes from a specific post.'''
-        likes = Like.objects.filter(post=self)
-        return likes
 
     def __str__(self):
         '''Return a string representation of the fields from the Like model.'''
