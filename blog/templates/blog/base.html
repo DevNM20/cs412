@@ -2,22 +2,50 @@
 <html>
 
 <head>
-    <title></title>
+    <title>Our Blog</title>
     <link rel="stylesheet" href="{% static 'styles-blog.css' %}">
 </head>
 
 <body>
-
-    <head>
+    <header>
         <h1>Our Blog</h1>
         <nav>
             <ul>
                 <li><a href="{% url 'random' %}">Random</a></li>
-                <li><a href="{% url 'show_all' %}">Show All</a></li>
-                <li><a href="{% url 'create_article' %}">Create</a></li>
+                <li><a href="{% url 'show_all' %}">Show All</a></li>      
+
+                <!-- URLs for logged in users only -->
+
+                 {% if request.user.is_authenticated %}
+                 <li><a href="{% url 'create_article' %}">Create</a></li>
+                 <li>
+                    <form action="{% url 'login' %}" method="get">
+                        <button type="submit">Login</button>
+                    </form>
+                </li>
+                 {% else %} 
+                 <!-- URLs for the users who are not logged in -->
+                  <li><a href="{% url 'login' %}">Login</a></li>
+                  {% endif %}
+                
+                <!-- Authentication -->
+                {% if request.user.is_authenticated %}
+                <li>
+                    <form action="{% url 'logout' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Logout</button>
+                    </form>
+                </li>
+                {% endif %}
             </ul>
+            <hr>
+            {% if request.user.is_authenticated %}
+            Logged in as: {{ request.user }}
+            {% else %}
+            Not logged in.
+            {% endif %}
         </nav>
-    </head>
+    </header>
 
     {% block content %}
     {% endblock %}

@@ -21,16 +21,51 @@ header and footer to the rest of the pages-->
     {% block content %}
     {% endblock content %}
     <nav>
-    {% if profile %}
-    <a class="add" href="{% url 'create_post' profile.pk %}"><img
-        src="https://media.istockphoto.com/id/688550958/vector/black-plus-sign-positive-symbol.jpg?s=612x612&w=0&k=20&c=0tymWBTSEqsnYYXWeWmJPxMotTGUwaGMGs6BMJvr7X4=">
-    </a>
-    <a href="{% url 'show_feed' profile.pk %}">Home</a>
-    <a href="{% url 'show_profile' profile.pk %}">Profile</a>
-    <a href="{% url 'show_feed' profile.pk %}">Feed</a> |
-    <a href="{% url 'search' profile.pk %}">Search</a>
-    {% endif %}
-    </nav>
+        <nav>
+            <ul>
+                <!-- Always available -->
+                <li><a href="{% url 'show_all_profiles' %}">All Profiles</a></li>
+    
+                {% if request.user.is_authenticated and profile %}
+                    <li>
+                        <a href="{% url 'create_post' %}">Create Post</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'show_feed'  %}">Feed</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'update_profile' %}">Edit Profile</a>
+                    </li>
+                {% endif %}
+    
+                <!-- Search is for any logged-in user -->
+                {% if request.user.is_authenticated and profile %}
+                    <li><a href="{% url 'search' %}">Search</a></li>
+                {% endif %}
+    
+                {% if request.user.is_authenticated %}
+                    <li>
+                        <form action="{% url 'logout' %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'login'  %}">Login</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'register' %}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
+            <hr>
+            {% if request.user.is_authenticated %}
+                Logged in as: {{ request.user.username }}
+            {% else %}
+                Not logged in.
+            {% endif %}
+        </nav>
 
     <a href="{% url 'show_all_profiles' %}">
         <img class="straw-hat-home"

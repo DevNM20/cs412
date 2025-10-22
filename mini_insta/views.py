@@ -9,6 +9,8 @@ from django.views.generic import *
 from django.urls import reverse
 from .models import Profile, Post, Photo, Follow
 from .forms import CreatePostForm, UpdateProfileForm, UpdatePostForm
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 # Create your views here.
 class ProfileListView(ListView):
     '''Defined a view class to show all Profiles.'''
@@ -17,7 +19,7 @@ class ProfileListView(ListView):
     template_name = "mini_insta/show_all_profiles.html"
     context_object_name = "profiles"
 
-class PostFeedListView(ListView):
+class PostFeedListView(LoginRequiredMixin, ListView):
     '''This is the view for the feed page'''
     model = Post 
     template_name = "mini_insta/show_feed.html"
@@ -37,9 +39,16 @@ class PostFeedListView(ListView):
         # add this post into the context dictionary:
         context['profile'] = profile
         return context
+    def get_object(self):
+        '''return one instance of the Article object selected at random.'''
+        return Profile.get.objects(user=self.request.user)
+        
+        all_articles = Article.objects.all()
+        article = random.choice(all_articles)
+        return article
 
 
-class SearchView(ListView):
+class SearchView(LoginRequiredMixin, ListView):
     '''Adds a search featurre to our mini-insta'''
     model = Profile
     template_name = "mini_insta/search_results.html"
@@ -90,9 +99,6 @@ class SearchView(ListView):
 
         return context
 
-
-
-
 class ProfileDetailView(DetailView):
     '''Display a single Profile.'''
 
@@ -121,7 +127,7 @@ class ShowFollowingDetailView(DetailView):
     template_name = "mini_insta/show_following.html"
     context_object_name = "profile"
 
-class CreatePostView(CreateView):
+class CreatePostView(LoginRequiredMixin, CreateView):
     '''This view is used to make a new Post object.'''
     model = Post 
     form_class = CreatePostForm
@@ -174,13 +180,13 @@ class CreatePostView(CreateView):
         # call reverse to generate the URL for this Post
         return reverse('show_profile', kwargs={'pk': pk})
 
-class UpdateProfileView(UpdateView):
+class UpdateProfileView(LoginRequiredMixin, UpdateView):
     '''View class to handle update of a Profile based on its PK.'''
     model = Profile
     form_class = UpdateProfileForm
     template_name = "mini_insta/update_profile_form.html"
 
-class UpdatePostView(UpdateView):
+class UpdatePostView(LoginRequiredMixin, UpdateView):
     '''View class to handle update of a Post based on its PK.'''
     model = Post
     form_class = UpdatePostForm
@@ -200,7 +206,14 @@ class UpdatePostView(UpdateView):
 
         return context
 
-class DeletePostView(DeleteView):
+    def get_object(self):
+        '''return one instance of the Article object selected at random.'''
+        
+        all_articles = Article.objects.all()
+        article = random.choice(all_articles)
+        return article
+
+class DeletePostView(LoginRequiredMixin, DeleteView):
     '''View class to delete a Post on an Profile.'''
     model = Post
     template_name = 'mini_insta/delete_post_form.html'
