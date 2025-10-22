@@ -24,8 +24,6 @@ header and footer to the rest of the pages-->
         <nav>
             <ul>
                 <!-- Always available -->
-                <li><a href="{% url 'show_all_profiles' %}">All Profiles</a></li>
-    
                 {% if request.user.is_authenticated and profile %}
                     <li>
                         <a href="{% url 'create_post' %}">Create Post</a>
