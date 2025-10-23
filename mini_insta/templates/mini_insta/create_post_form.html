@@ -6,7 +6,7 @@
  {% block content %}
  
  <!--Display thr HTML Form-->
- <form method="POST" action="{% url 'create_post' profile.pk %}" enctype="multipart/form-data">
+ <form method="POST" action="{% url 'create_post' %}" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_table }}<br><br>
     <label for="files">Select Photos:</label>

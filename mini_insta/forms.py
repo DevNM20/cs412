@@ -6,7 +6,7 @@ from django import forms
 from .models import *
 
 class CreatePostForm(forms.ModelForm):
-    '''A form to add an Post to the database.'''
+    '''A form to add a Post to the database.'''
 
     class Meta:
         '''Associate this form with a model from our database.'''
@@ -15,6 +15,7 @@ class CreatePostForm(forms.ModelForm):
 
 class UpdateProfileForm(forms.ModelForm):
     '''A form to handle an update to an Article.'''
+
     class Meta:
         '''Associate this form with a model in our database.'''
         model = Profile
@@ -28,5 +29,12 @@ class UpdatePostForm(forms.ModelForm):
         model = Post 
         fields = ['caption']
 
+class CreateProfileForm(forms.ModelForm):
+     '''A form to handle a new profile to the database.'''
 
+     class Meta:
+        '''Associate this form woth a model in our database.'''
+        model = Profile 
+        fields = ['username', 'display_name', 'bio_text', 'profile_image_url']
+        
 
