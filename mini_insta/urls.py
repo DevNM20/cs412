@@ -25,4 +25,11 @@ urlpatterns = [
 
     path('login/', auth_views.LoginView.as_view(template_name='mini_insta/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='mini_insta/logged_out.html'), name='logout'),
+    
+    path('profile/<int:pk>/follow', FollowView.as_view(), name='follow_profile'),
+    path('profile/<int:pk>/delete_follow', DeleteFollowView.as_view(), name='unfollow_profile'),
+
+    path("post/<int:pk>/like/", LikePostView.as_view(), name="like_post"),
+    path("post/<int:pk>/unlike/", DeleteLikeView.as_view(), name="unlike_post")
+
 ]

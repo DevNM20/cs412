@@ -56,6 +56,9 @@ class Profile(models.Model):
     def get_num_following(self):
         '''Returns the length of the list of the user's following accounts'''
         return len(self.get_following())
+
+    def is_followed_by(self, profile):
+        return Follow.objects.filter(profile=self, follower_profile=profile).exists()
         
     def get_post_feed(self):
         """Return a QuerySet of Posts made by the Profiles this Profile follows, most recent first."""
@@ -95,6 +98,18 @@ class Post(models.Model):
         '''Return a QuerySet of all likes from a specific post.'''
         likes = Like.objects.filter(post=self)
         return likes
+
+    def get_all_likes(self):
+        '''Return all Like objects for this Post.'''
+        return Like.objects.filter(post=self)
+
+    def get_num_likes(self):
+        '''Return the number of likes for this Post.'''
+        return self.get_all_likes().count()
+
+    def is_liked_by(self, profile):
+        '''Return True if this post is liked by the given profile.'''
+        return Like.objects.filter(post=self, profile=profile).exists()
         
 
 class Photo(models.Model):
@@ -130,7 +145,7 @@ class Follow(models.Model):
 
     def __str__(self):
         '''Return a string representation of the fields from the Follow model.'''
-        return f'{self.profile} follows: {self.follower_profile}'
+        return f'{self.follower_profile} follows: {self.profile}'
 
 class Comment(models.Model):
     '''Encapsulates the idea of one Profile providing a response or commentary on a Post.'''

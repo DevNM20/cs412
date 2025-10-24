@@ -5,6 +5,7 @@ profile with their username, display name, bio, and their join date-->
 
 {% extends 'mini_insta/base.html' %}
 
+
 {% block content %}
 <h1>{{profile.username}}</h1>
 <p>{{profile.display_name}}</p>
@@ -22,6 +23,18 @@ profile with their username, display name, bio, and their join date-->
         Following: {{ profile.get_num_following }}
     </a>
 </p>
+{% if is_following %}
+    <form action="{% url 'unfollow_profile' profile.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Unfollow</button>
+    </form>
+{% else %}
+    <form action="{% url 'follow_profile' profile.pk %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Follow</button>
+    </form>
+{% endif %}
+
 
 <main class="grid-container">
     <div>

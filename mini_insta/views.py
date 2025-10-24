@@ -7,13 +7,15 @@ from django.shortcuts import render
 from django.db.models import Q
 from django.views.generic import *
 from django.urls import reverse
-from .models import Profile, Post, Photo, Follow
+from .models import Profile, Post, Photo, Follow, Like
 from .forms import CreatePostForm, CreateProfileForm, UpdateProfileForm, UpdatePostForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from mini_insta.models import Profile
 from django.contrib.auth import login
+from django.shortcuts import redirect
+
 
 
 
@@ -105,6 +107,16 @@ class ProfileDetailView(DetailView):
     template_name = "mini_insta/show_profile.html"
     context_object_name = "profile"
 
+    def get_context_data(self, **kwargs):
+        '''Give extra context for the current user's profile such as their follow status.'''
+        context = super().get_context_data(**kwargs)
+        profile = self.get_object()
+        user_profile = Profile.objects.get(user=self.request.user)
+
+        context["my_profile"] = user_profile
+        context["is_following"] = Follow.objects.filter(profile=profile, follower_profile=user_profile).exists()
+        return context
+
 class CreateProfileView(CreateView):
     '''Used to make a new Profile object.'''
     model = Profile
@@ -118,6 +130,7 @@ class CreateProfileView(CreateView):
         return context
     
     def form_valid(self, form):
+        '''Handles the submission for both the profile form and the usercreationform.'''
         user_form = UserCreationForm(self.request.POST)
         if user_form.is_valid():
             user = user_form.save()
@@ -131,10 +144,6 @@ class CreateProfileView(CreateView):
             return self.render_to_response(
                 self.get_context_data(form=form, user_creation_form=user_form)
             )
-        
-
-
-    
 
 class PostDetailView(DetailView):
     '''Display a single Post'''
@@ -142,6 +151,15 @@ class PostDetailView(DetailView):
     model = Post 
     template_name = "mini_insta/show_post.html"
     context_object_name = "post"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        post = self.get_object()
+        my_profile = Profile.objects.get(user=self.request.user)
+
+        context["my_profile"] = my_profile
+        context["is_liked"] = post.is_liked_by(my_profile)  # true/false
+        return context
 
 class ShowFollowersDetailView(DetailView):
     '''Display the followers'''
@@ -273,6 +291,78 @@ class DeletePostView(LoginRequiredMixin, DeleteView):
         context['profile'] = profile
 
         return context
+
+class FollowView(LoginRequiredMixin, DetailView):
+    ''' View class that handles when a user follows a profile '''
+    model = Profile
+    template_name = "mini_insta/show_profile.html"
+
+    def post(self, request, pk, *args, **kwargs):
+        '''Override the post method so when a user follows a page the user gets 
+        redirected to the profile's page to see their follower count.'''
+        user_profile = Profile.objects.get(user=request.user)
+        other_profile = Profile.objects.get(pk=pk)
+
+        if user_profile != other_profile:
+            Follow.objects.get_or_create(
+                profile=other_profile,
+                follower_profile=user_profile
+            )
+
+        return redirect("show_profile", pk=other_profile.pk)
+
+
+class DeleteFollowView(LoginRequiredMixin, DetailView):
+    '''View class that handles the removing of the follow relationship for the logged-in user.'''
+    model = Profile
+    template_name = "mini_insta/show_profile.html"
+
+    def post(self, request, pk, *args, **kwargs):
+        '''When the user unfollows this method will be called to delete that relationship between the two profiles.'''
+        user_profile = Profile.objects.get(user=request.user)
+        other_profile = Profile.objects.get(pk=pk)
+
+        if user_profile != other_profile:
+            Follow.objects.filter(
+                profile=other_profile,
+                follower_profile=user_profile
+            ).delete()
+
+        return redirect("show_profile", pk=other_profile.pk)
+
+class LikePostView(LoginRequiredMixin, DetailView):
+    '''View class that adds the like on a post for the logged-in user.'''
+    model = Post
+    template_name = "mini_insta/show_post.html"
+
+    def post(self, request, pk, *args, **kwargs):
+        '''Override the post method so when a user likes a post the user gets 
+        redirected to the profile's page to see their like count.'''
+        profile = Profile.objects.get(user=request.user)
+        post = Post.objects.get(pk=pk)
+
+        # Prevent duplicate likes
+        Like.objects.get_or_create(profile=profile, post=post)
+
+        return redirect("show_post", pk=post.pk)
+
+
+class DeleteLikeView(LoginRequiredMixin, DetailView):
+    '''View class that handles the removing of the like on a post for the logged-in user.'''
+    model = Post
+    template_name = "mini_insta/show_post.html"
+
+    def post(self, request, pk, *args, **kwargs):
+        '''When a user sends a POST request it will call this method to remove the like on the specific post.'''
+
+        profile = Profile.objects.get(user=request.user)
+        post = Post.objects.get(pk=pk)
+
+        # Remove like if exists
+        Like.objects.filter(profile=profile, post=post).delete()
+
+        return redirect("show_post", pk=post.pk)
+
 
 
 
