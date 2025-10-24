@@ -18,12 +18,12 @@ profile with their username, display name, bio, and their join date-->
 <p>
     <a href="{% url 'show_followers' profile.pk %}">
         Followers: {{ profile.get_num_followers }}
-    </a> |
+    </a> 
     <a href="{% url 'show_following' profile.pk %}">
         Following: {{ profile.get_num_following }}
     </a>
 </p>
-{% if is_following %}
+{% if is_following and request.user.is_authenticated and request.user == profile.user %}
     <form action="{% url 'unfollow_profile' profile.pk %}" method="post">
         {% csrf_token %}
         <button type="submit">Unfollow</button>

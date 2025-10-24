@@ -51,6 +51,10 @@ class PostFeedListView(LoginRequiredMixin, ListView):
         '''return one instance of the Article object selected at random.''' 
         return Profile.objects.get(user=self.request.user)
 
+    def get_login_url(self):
+        '''Return the URL for ths app's login page.'''
+        return reverse('login')
+
 
 
 class SearchView(LoginRequiredMixin, ListView):
@@ -58,6 +62,10 @@ class SearchView(LoginRequiredMixin, ListView):
     model = Profile
     template_name = "mini_insta/search_results.html"
     context_object_name = "profiles"
+
+    def get_login_url(self):
+        '''Return the URL for ths app's login page.'''
+        return reverse('login')
     
     def dispatch(self, request, *args, **kwargs):
             '''override super method to handle any request'''
@@ -111,10 +119,6 @@ class ProfileDetailView(DetailView):
         '''Give extra context for the current user's profile such as their follow status.'''
         context = super().get_context_data(**kwargs)
         profile = self.get_object()
-        user_profile = Profile.objects.get(user=self.request.user)
-
-        context["my_profile"] = user_profile
-        context["is_following"] = Follow.objects.filter(profile=profile, follower_profile=user_profile).exists()
         return context
 
 class CreateProfileView(CreateView):
@@ -154,11 +158,7 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        post = self.get_object()
-        my_profile = Profile.objects.get(user=self.request.user)
-
-        context["my_profile"] = my_profile
-        context["is_liked"] = post.is_liked_by(my_profile)  # true/false
+        post = self.get_object() 
         return context
 
 class ShowFollowersDetailView(DetailView):
@@ -180,6 +180,10 @@ class CreatePostView(LoginRequiredMixin, CreateView):
     model = Post 
     form_class = CreatePostForm
     template_name = "mini_insta/create_post_form.html"
+
+    def get_login_url(self):
+        '''Return the URL for ths app's login page.'''
+        return reverse('login')
 
     def get_context_data(self, **kwargs):
         '''Return the dictionary of context variables for use in the template.'''
@@ -241,12 +245,20 @@ class UpdateProfileView(LoginRequiredMixin, UpdateView):
         '''return one instance of the Article object selected at random.'''
         return Profile.objects.get(user=self.request.user)
 
+    def get_login_url(self):
+        '''Return the URL for ths app's login page.'''
+        return reverse('login')
+
 
 class UpdatePostView(LoginRequiredMixin, UpdateView):
     '''View class to handle update of a Post based on its PK.'''
     model = Post
     form_class = UpdatePostForm
     template_name = "mini_insta/update_post_form.html"
+
+    def get_login_url(self):
+        '''Return the URL for ths app's login page.'''
+        return reverse('login')
 
     def get_context_data(self, **kwargs):
         '''Return the dictionary of context variables for use in the template.'''
@@ -277,6 +289,10 @@ class DeletePostView(LoginRequiredMixin, DeleteView):
 
         #return the URL to redirect to:
         return reverse('show_profile', kwargs={'pk': self.object.profile.pk})
+
+    def get_login_url(self):
+        '''Return the URL for ths app's login page.'''
+        return reverse('login')
     
     def get_context_data(self, **kwargs):
         '''Return the dictionary of context variables for use in the template.'''
@@ -296,6 +312,10 @@ class FollowView(LoginRequiredMixin, DetailView):
     ''' View class that handles when a user follows a profile '''
     model = Profile
     template_name = "mini_insta/show_profile.html"
+
+    def get_login_url(self):
+        '''Return the URL for ths app's login page.'''
+        return reverse('login')
 
     def post(self, request, pk, *args, **kwargs):
         '''Override the post method so when a user follows a page the user gets 
@@ -317,6 +337,10 @@ class DeleteFollowView(LoginRequiredMixin, DetailView):
     model = Profile
     template_name = "mini_insta/show_profile.html"
 
+    def get_login_url(self):
+        '''Return the URL for ths app's login page.'''
+        return reverse('login')
+
     def post(self, request, pk, *args, **kwargs):
         '''When the user unfollows this method will be called to delete that relationship between the two profiles.'''
         user_profile = Profile.objects.get(user=request.user)
@@ -330,10 +354,14 @@ class DeleteFollowView(LoginRequiredMixin, DetailView):
 
         return redirect("show_profile", pk=other_profile.pk)
 
-class LikePostView(LoginRequiredMixin, DetailView):
+class LikePostView(LoginRequiredMixin, View):
     '''View class that adds the like on a post for the logged-in user.'''
     model = Post
     template_name = "mini_insta/show_post.html"
+
+    def get_login_url(self):
+        '''Return the URL for ths app's login page.'''
+        return reverse('login')
 
     def post(self, request, pk, *args, **kwargs):
         '''Override the post method so when a user likes a post the user gets 
@@ -351,6 +379,10 @@ class DeleteLikeView(LoginRequiredMixin, DetailView):
     '''View class that handles the removing of the like on a post for the logged-in user.'''
     model = Post
     template_name = "mini_insta/show_post.html"
+
+    def get_login_url(self):
+        '''Return the URL for ths app's login page.'''
+        return reverse('login')
 
     def post(self, request, pk, *args, **kwargs):
         '''When a user sends a POST request it will call this method to remove the like on the specific post.'''
