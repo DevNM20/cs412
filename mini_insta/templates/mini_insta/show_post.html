@@ -11,12 +11,14 @@ the caption and timestamp of the individual posts of a profile-->
 <div class="post-detail">
     <p><strong>Caption:</strong> {{ post.caption }}</p>
     <p><strong>Posted at:</strong> {{ post.timestamp }}</p>
+{% if request.user == profile.user %}
     <a href="{% url 'update_post' %}">
         <button type="button">Update Post</button>
     </a>
     <a href="{% url 'delete_post' post.pk %}">
         <button type="button">Delete Post</button>
     </a>
+    {% endif %}
 </div>
 
 
@@ -34,16 +36,16 @@ the caption and timestamp of the individual posts of a profile-->
         {% for comment in post.get_all_comments %}
         <p>{{ comment.text }}</p>
         {% endfor %}
-        {% if is_liked %}
-        <form action="{% url 'unlike_post' post.pk %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Unlike</button>
-        </form>
+        {% if post.is_liked_by %}
+            <form action="{% url 'unlike_post' post.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Unlike</button>
+            </form>
         {% else %}
-        <form action="{% url 'like_post' post.pk %}" method="post">
-            {% csrf_token %}
-            <button type="submit">Like</button>
-        </form>
+            <form action="{% url 'like_post' post.pk %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Like</button>
+            </form>
         {% endif %}
         <p><strong>Likes:</strong> {{ post.get_num_likes }}</p>
     </div>

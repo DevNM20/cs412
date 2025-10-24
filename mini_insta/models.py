@@ -109,6 +109,7 @@ class Post(models.Model):
 
     def is_liked_by(self, profile):
         '''Return True if this post is liked by the given profile.'''
+
         return Like.objects.filter(post=self, profile=profile).exists()
         
 

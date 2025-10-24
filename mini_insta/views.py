@@ -119,6 +119,12 @@ class ProfileDetailView(DetailView):
         '''Give extra context for the current user's profile such as their follow status.'''
         context = super().get_context_data(**kwargs)
         profile = self.get_object()
+        current_user = self.request.user
+        if current_user.is_authenticated:
+            x = Profile.objects.get(user = current_user)
+        else:
+            x = None
+        context["is_following"] = x in self.object.get_followers()
         return context
 
 class CreateProfileView(CreateView):
@@ -155,6 +161,7 @@ class PostDetailView(DetailView):
     model = Post 
     template_name = "mini_insta/show_post.html"
     context_object_name = "post"
+
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -332,7 +339,7 @@ class FollowView(LoginRequiredMixin, DetailView):
         return redirect("show_profile", pk=other_profile.pk)
 
 
-class DeleteFollowView(LoginRequiredMixin, DetailView):
+class DeleteFollowView(LoginRequiredMixin, View):
     '''View class that handles the removing of the follow relationship for the logged-in user.'''
     model = Profile
     template_name = "mini_insta/show_profile.html"
@@ -366,7 +373,7 @@ class LikePostView(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         '''Override the post method so when a user likes a post the user gets 
         redirected to the profile's page to see their like count.'''
-        profile = Profile.objects.get(user=request.user)
+        profile = Profile.objects.get(user=self.request.user)
         post = Post.objects.get(pk=pk)
 
         # Prevent duplicate likes
@@ -375,20 +382,19 @@ class LikePostView(LoginRequiredMixin, View):
         return redirect("show_post", pk=post.pk)
 
 
-class DeleteLikeView(LoginRequiredMixin, DetailView):
+class DeleteLikeView(LoginRequiredMixin, View):
     '''View class that handles the removing of the like on a post for the logged-in user.'''
-    model = Post
-    template_name = "mini_insta/show_post.html"
 
     def get_login_url(self):
         '''Return the URL for ths app's login page.'''
         return reverse('login')
 
-    def post(self, request, pk, *args, **kwargs):
+    def dispatch(self, request, *args, **kwargs):
         '''When a user sends a POST request it will call this method to remove the like on the specific post.'''
+        post_id = kwargs.get('pk')
 
-        profile = Profile.objects.get(user=request.user)
-        post = Post.objects.get(pk=pk)
+        profile = Profile.objects.get(user=self.request.user)
+        post = Post.objects.get(pk=post_id)
 
         # Remove like if exists
         Like.objects.filter(profile=profile, post=post).delete()

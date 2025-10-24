@@ -11,9 +11,11 @@ profile with their username, display name, bio, and their join date-->
 <p>{{profile.display_name}}</p>
 <p>{{profile.bio_text}}</p>
 <p>{{profile.join_date}}</p>
+{% if request.user == profile.user %}
 <a href="{% url 'update_profile' %}">
     <button type="button">Update</button>
 </a>
+{% endif %}
 
 <p>
     <a href="{% url 'show_followers' profile.pk %}">
@@ -23,7 +25,8 @@ profile with their username, display name, bio, and their join date-->
         Following: {{ profile.get_num_following }}
     </a>
 </p>
-{% if is_following and request.user.is_authenticated and request.user == profile.user %}
+{% if request.user != profile.user %}
+{% if is_following and request.user.is_authenticated %}
     <form action="{% url 'unfollow_profile' profile.pk %}" method="post">
         {% csrf_token %}
         <button type="submit">Unfollow</button>
@@ -33,6 +36,7 @@ profile with their username, display name, bio, and their join date-->
         {% csrf_token %}
         <button type="submit">Follow</button>
     </form>
+{% endif %}
 {% endif %}
 
 
