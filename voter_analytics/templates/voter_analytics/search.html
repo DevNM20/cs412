@@ -1,0 +1,88 @@
+<!--File: search.html-->
+<!--Author: Nathan Moges (bmoges18@bu.edu) 10/31/25-->
+<!--Description: This file search.html will filter the 
+voters based on certain requirements given by the professor-->
+
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+
+<h2>Filter Voters</h2>
+
+<table>
+<form action="{% url 'voter_list' %}" method="get">
+
+  <tr>
+    <th>Party Affiliation:</th>
+    <td>
+      <select name="party">
+        <option value="">-- Any --</option>
+        <option value="D" {% if request.GET.party == "D" %}selected{% endif %}>Democrat (D)</option>
+        <option value="R" {% if request.GET.party == "R" %}selected{% endif %}>Republican (R)</option>
+        <option value="U" {% if request.GET.party == "U" %}selected{% endif %}>Unenrolled (U)</option>
+        <option value="O" {% if request.GET.party == "O" %}selected{% endif %}>Other (O)</option>
+      </select>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Born After (year):</th>
+    <td>
+      <select name="min_dob">
+        <option value="">-- Any --</option>
+        {% for year in years %}
+          <option value="{{ year }}" {% if request.GET.min_dob == year|stringformat:"s" %}selected{% endif %}>
+            {{ year }}
+          </option>
+        {% endfor %}
+      </select>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Born Before (year):</th>
+    <td>
+      <select name="max_dob">
+        <option value="">-- Any --</option>
+        {% for year in years %}
+          <option value="{{ year }}" {% if request.GET.max_dob == year|stringformat:"s" %}selected{% endif %}>
+            {{ year }}
+          </option>
+        {% endfor %}
+      </select>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Voter Score:</th>
+    <td>
+      <select name="voter_score">
+        <option value="">-- Any --</option>
+        {% for n in "12345" %}
+          <option value="{{ n }}" {% if request.GET.voter_score == n %}selected{% endif %}>{{ n }}</option>
+        {% endfor %}
+      </select>
+    </td>
+  </tr>
+
+  <tr>
+    <th>Voted In:</th>
+    <td>
+      <input type="checkbox" name="v20state" {% if request.GET.v20state %}checked{% endif %}> 2020 State Election<br>
+      <input type="checkbox" name="v21town" {% if request.GET.v21town %}checked{% endif %}> 2021 Town Election<br>
+      <input type="checkbox" name="v21primary" {% if request.GET.v21primary %}checked{% endif %}> 2021 Primary<br>
+      <input type="checkbox" name="v22general" {% if request.GET.v22general %}checked{% endif %}> 2022 General<br>
+      <input type="checkbox" name="v23town" {% if request.GET.v23town %}checked{% endif %}> 2023 Town Election<br>
+    </td>
+  </tr>
+
+  <tr>
+    <td><input type="submit" value="Apply Filters"></td>
+    <td><a href="{% url 'voter_list' %}">Reset</a></td>
+  </tr>
+
+</form>
+</table>
+
+{% endblock %}

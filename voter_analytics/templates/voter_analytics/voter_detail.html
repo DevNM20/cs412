@@ -1,0 +1,36 @@
+<!--File: voter_detail.html-->
+<!--Author: Nathan Moges (bmoges18@bu.edu) 10/31/25-->
+<!--Description: This file voter_detail.html 
+will show the info of an individual voter-->
+
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+
+<h1>{{ voter.first_name }} {{ voter.last_name }}</h1>
+
+<table>
+  <tr><th>Street Number</th><td>{{ voter.street_number }}</td></tr>
+  <tr><th>Street Name</th><td>{{ voter.street_name }}</td></tr>
+  <tr><th>Apartment</th><td>{{ voter.apt_number }}</td></tr>
+  <tr><th>ZIP Code</th><td>{{ voter.zip_code }}</td></tr>
+  <tr><th>Precinct</th><td>{{ voter.precinct_number }}</td></tr>
+
+  <tr><th>Party Affiliation</th><td>{{ voter.party_affilitation }}</td></tr>
+  <tr><th>Date of Birth</th><td>{{ voter.dob }}</td></tr>
+  <tr><th>Date of Registration</th><td>{{ voter.date_of_registration }}</td></tr>
+  <tr><th>Voter Score</th><td>{{ voter.voter_score }}</td></tr>
+
+  <tr><th>Voted 2020 State</th><td>{{ voter.v20state }}</td></tr>
+  <tr><th>Voted 2021 Town</th><td>{{ voter.v21town }}</td></tr>
+  <tr><th>Voted 2021 Primary</th><td>{{ voter.v21primary }}</td></tr>
+  <tr><th>Voted 2022 General</th><td>{{ voter.v22general }}</td></tr>
+  <tr><th>Voted 2023 Town</th><td>{{ voter.v23town }}</td></tr>
+</table>
+
+<br>
+
+<a href="{% url 'voter_list' %}">Back to Voter List</a>
+
+{% endblock %}

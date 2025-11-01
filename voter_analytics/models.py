@@ -1,3 +1,8 @@
+#File: models.py
+#Author: Nathan Moges (bmoges18@bu.edu) 10/3/25
+#Description: The model.py creates the model that we need to create our app
+
+
 from django.db import models
 
 # Create your models here.
@@ -53,7 +58,7 @@ class Voter(models.Model):
             
     
     
-                result.save() # commit to database
+                votes.save() # commit to database
                 print(f'Created result: {votes}')
                 
             except:

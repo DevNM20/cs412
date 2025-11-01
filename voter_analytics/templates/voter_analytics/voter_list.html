@@ -1,0 +1,68 @@
+<!--File: voter_detail.html-->
+<!--Author: Nathan Moges (bmoges18@bu.edu) 10/31/25-->
+<!--Description: This file voter_detail.html 
+will show the info of an individual voter-->
+
+
+
+{% extends 'voter_analytics/base.html' %}
+
+{% block content %}
+
+<h1>Newton Voter Listing</h1>
+
+<!-- Filter Form -->
+<div>
+    {% include "voter_analytics/search.html" %}
+</div>
+
+<div>
+    {% if is_paginated %}
+        <ul>
+            {% if page_obj.has_previous %}
+                <li>
+                    <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+                </li>
+            {% endif %}
+                <li>
+                    <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+                </li>
+            {% if page_obj.has_next %}
+                <li>
+                    <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+                </li>
+            {% endif %}
+        </ul>
+    {% endif %}
+</div>
+
+<div>
+    <table border="1" cellspacing="0" cellpadding="5" style="border-collapse: collapse; width: 100%; background-color: white; color: black;">
+        <thead style="background-color: lightgray;">
+          <tr>
+            <th>Name</th>
+            <th>Street Address</th>
+            <th>DOB</th>
+            <th>Party Affiliation</th>
+            <th>Voter Score</th>
+          </tr>
+        </thead>
+      
+        <tbody>
+          {% for v in voters %}
+          <tr>
+            <td><a href="{% url 'voter_detail' v.pk %}">{{ v.first_name }} {{ v.last_name }}</a></td>
+            <td>{{ v.street_number }} {{ v.street_name }} {{ v.apt_number }}</td>
+            <td>{{ v.dob }}</td>
+            <td>{{ v.party_affilitation }}</td>
+            <td>{{ v.voter_score }}</td>
+          </tr>
+          {% empty %}
+          <tr><td colspan="5" style="text-align: center;">No voters found.</td></tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      
+</div>
+  
+{% endblock %}
