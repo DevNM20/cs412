@@ -11,10 +11,10 @@ urlpatterns = [
 
     #API
     path(r'api/', RandomJokeAPIView.as_view(), name="random_joke"),
-    path(r'api/random', RandomJokeDetailAPIView.as_view(), name=""),
-    path(r'api/jokes', JokeListAPIView.as_view(), name=""),
+    path(r'api/random/', RandomJokeDetailAPIView.as_view(), name=""),
+    path(r'api/jokes/', JokeListAPIView.as_view(), name=""),
     path(r'api/joke/<int:pk>/', JokeDetailAPIView.as_view(), name=""),
-    path(r'api/pictures', PictureListAPIView.as_view(), name=""),
-    #path(r'api/picture/<int:pk>', as_view(), name=""),
-
+    path(r'api/pictures/', PictureListAPIView.as_view(), name=""),
+    path(r'api/picture/<int:pk>/', PictureDetailAPIView.as_view(), name=""),
+    path(r'api/random_picture/', RandomPictureDetailAPIView.as_view(), name="random_picture"),
 ]

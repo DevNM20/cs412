@@ -114,8 +114,6 @@ class RandomJokeDetailAPIView(generics.ListAPIView):
         '''
         return [random.choice(Joke.objects.all())]
 
-
-
 # 'api/jokes' - returns a Json representation of all Jokes
 class JokeListAPIView(generics.ListCreateAPIView):
     '''
@@ -125,7 +123,6 @@ class JokeListAPIView(generics.ListCreateAPIView):
     serializer_class = JokeSerializer
 
 # 'api/joke/<int:pk>' - returns a Json representation of one Joke by its primary key
-
 class JokeDetailAPIView(generics.RetrieveAPIView):
     '''
     An API view to return one Joke by its primary key
@@ -149,3 +146,17 @@ class PictureDetailAPIView(generics.RetrieveAPIView):
     '''
     queryset = Picture.objects.all()
     serializer_class = PictureSerializer
+
+# 'api/random_picture' - returns a Json representation of one Picture selected at random
+class RandomPictureDetailAPIView(generics.ListAPIView):
+    '''
+    An API view to return one random Picture
+    '''
+    serializer_class = PictureSerializer
+
+    def get_queryset(self):
+        '''
+        Return a queryset with one random Picture
+        '''
+        return [random.choice(Picture.objects.all())]
+
