@@ -1,0 +1,21 @@
+<!--File: random.html-->
+<!--Author: Nathan Moges (bmoges18@bu.edu) 11/11/25-->
+<!--Description: This file random_joke.html will display 
+a random joke to the user-->
+{% extends 'dadjokes/base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2>Dad Jokes lol!</h2>
+
+  {% if picture %}
+    <img src="{{ picture.image_url }}" alt="Random picture" class="image">
+  {% endif %}
+
+  <div class="card">
+    <h3>{{ joke.text }}</h3>
+    <p>Created by: {{ joke.name }}</p>
+    <p>Created at: {{ joke.timestamp }}</p>
+  </div>
+</div>
+{% endblock %}

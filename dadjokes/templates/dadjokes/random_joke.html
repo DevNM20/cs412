@@ -1,0 +1,15 @@
+<!--File: random_joke.html-->
+<!--Author: Nathan Moges (bmoges18@bu.edu) 11/11/25-->
+<!--Description: This file random.html will display 
+a random joke to the user-->
+{% extends 'dadjokes/base.html' %}
+
+{% block content %}
+<body>
+<div class="container">
+    <img src="{{ picture.image_url }}">
+    <h2>{{ joke.text }}</h2>
+    <p>Created by: {{joke.name}}</p>
+</div>
+</body>
+{% endblock %}

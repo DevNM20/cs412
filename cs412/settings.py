@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     "mini_insta", #Assignment3
     "marathon_analytics",
     "voter_analytics",
+    "rest_framework",
+    "dadjokes",
 ]
 
 MIDDLEWARE = [

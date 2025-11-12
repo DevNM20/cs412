@@ -1,0 +1,22 @@
+<!--File: show_all_jokes.html-->
+<!--Author: Nathan Moges (bmoges18@bu.edu) 11/11/25-->
+<!--Description: This file show_all_jokes.html will display 
+all the jokes to the user-->
+{% extends 'dadjokes/base.html' %}
+
+{% block content %}
+<div class="container">
+  <h2>All Jokes</h2>
+
+    <ul class="list">
+      {% for joke in jokes %}
+        <li class="card">
+          <h3>{{ joke.text }}</h3>
+          <p>By: {{ joke.name }}</p>
+          <p>Created: {{ joke.timestamp }}</p>
+          <a class="button" href="{% url 'show_joke' joke.pk %}">View Joke</a>
+        </li>
+      {% endfor %}
+    </ul>
+</div>
+{% endblock %}

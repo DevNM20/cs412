@@ -1,0 +1,20 @@
+<!--File: picture.html-->
+<!--Author: Nathan Moges (bmoges18@bu.edu) 11/11/25-->
+<!--Description: This file picture.html will display one
+picture to the user-->
+{% extends 'dadjokes/base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Picture</h2>
+  
+    <div class="card">
+        <img src="{{ picture.image_url }}" alt="Dad Joke Picture" class="image">
+      <p><strong>Created by:</strong> {{ picture.name }}</p>
+      <p><strong>Uploaded on:</strong> {{ picture.timestamp }}</p>
+    </div>
+  
+    <a href="{% url 'show_all_pictures' %}" class="button">Back to All Pictures</a>
+  </div>
+  {% endblock %}
+  

@@ -1,0 +1,46 @@
+<!--File: base.html-->
+<!--Author: Nathan Moges (bmoges18@bu.edu) 11/11/25-->
+<!--Description: This file base.html will extend 
+header and footer to the rest of the pages-->
+
+{% load static %}
+<html>
+<head>
+    <title>Form Data</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+
+<body>
+    <header>
+        <h1>Dad Jokes</h1>
+    </header>
+
+    {% block content %}
+    {% endblock content %}
+    <nav>
+        <ul>
+            <li>
+                <a href="{% url 'home' %}">Home</a>
+            </li>
+            <li>
+                <a href="{% url 'random' %}">Random Joke</a>
+            </li>
+            <li>
+                <a href="{% url 'show_all_jokes' %}">All Jokes</a>
+            </li>
+            {% if joke %}
+            <li><a href="{% url 'show_joke' joke.pk %}">One Joke</a></li>
+            {% endif %}
+
+            <li>
+                <a href="{% url 'show_all_pictures'  %}">All Pictures</a>
+            </li>
+            {% if picture %}
+            <li>
+                <a href="{% url 'show_picture' picture.pk %}">One Picture</a>
+            </li>
+            {% endif %}
+    </nav>
+</body>
+
+</html>

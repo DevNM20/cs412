@@ -1,0 +1,10 @@
+<!--File: joke.html-->
+<!--Author: Nathan Moges (bmoges18@bu.edu) 11/11/25-->
+<!--Description: This file joke.html will display one
+joke to the user-->
+{% extends 'dadjokes/base.html' %}
+{% block content %}
+  <h2>{{ joke.text }}</h2>
+  <p>By: {{ joke.name }}</p>
+  <p>Created: {{ joke.timestamp }}</p>
+{% endblock %}

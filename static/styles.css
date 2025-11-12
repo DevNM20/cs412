@@ -1,302 +1,118 @@
-body {
-    background-color: white;
-    color: slategray;
-    font-family: arial;
-    max-width: 960px;
-    margin: 20px auto;
-    padding: 100px 20px 20px 20px;
+/* ===============================
+   Clean Modern Pastel Theme
+   =============================== */
+
+   body {
+    font-family: "Inter", "Helvetica Neue", Arial, sans-serif;
+    background-color: #f7f9fc;
+    color: #1c1c1c;
+    margin: 0;
+    padding: 0;
 }
 
-h1,h2,h3,h4,h5{
+/* Main wrapper */
+.container {
+    max-width: 850px;
+    margin: 40px auto;
+    padding: 32px;
+    background-color: #ffffff;
+    border-radius: 16px;
+}
+
+/* Headings */
+h1 {
     text-align: center;
-    font-weight: normal;
-    background:aliceblue;
-    margin: 0;
-    font-size: 48px;
-    max-width: 960px;
-    margin: 20px auto;
-    padding: 20px auto;
+    font-size: 2.2rem;
+    margin-bottom: 24px;
+    color: #304866;
+}
+
+h2 {
+    color: #3e5b84;
+    margin-top: 20px;
 }
 
 p {
-    text-align: center;
-    font-size: 36px;
+
+    margin: 8px 0;
 }
 
-a, a:visited {
-    color: slategrey;
+strong {
+    color: #203354;
+}
+
+/* Lists */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #f2f6fb;
+    margin-bottom: 14px;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+/* Buttons & links */
+a {
+    color: #3a6fd0;
     text-decoration: none;
+    font-weight: 500;
 }
 
 a:hover {
-    color: darkblue;
-    text-decoration: none;
-    background-color: white;
+    text-decoration: underline;
+    color: #244b8a;
 }
 
-header {
-    position: fixed;   
-    top: 0;           
-    left: 0;           
-    right: 0;          
-    height: 80px;     
-    width: 100%;      
-    background: aliceblue;
-    z-index: 1000;     
-    display: flex;     
-    align-items: center;
-    justify-content: center;
+.btn {
+    display: inline-block;
+    background-color: #3a6fd0;
+    color: #ffffff;
+    padding: 10px 18px;
+    border-radius: 6px;
+    margin-top: 10px;
 }
 
-
-footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background: aliceblue;
-    padding: 5px 20px;   
-    display: flex;
-    justify-content: center;  
-    align-items: flex-end;     
+.btn:hover {
+    background-color: #2e58a8;
 }
 
-footer nav {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;  
-    align-items: flex-end;           
-}
-
-footer img {
-    width: 50px; 
-    height: auto;
-}
-
-footer .add {
-    align-self: flex-end; 
-    margin-bottom: 0;     
-}
-
-
+/* Images */
 img {
     display: block;
-    text-align: center;       
-    margin-left: auto;   
-    margin-right: auto;  
-    width: 100px;         
-}
-
-.add {
-    display: block;       
-    margin-left: auto;   
-    margin-right: auto;  
-    width: 100px;   
-}
-
-.straw-hat-home {
-    width: 100px;
-}
-
-
-
-.wrapper {              
-    border: 2px solid;
     max-width: 100%;
-    position: relative;
-    top: 80px;
-    scroll-padding-top: 100px;
-    padding-bottom: 50px;
+    height: auto;
+    margin: 20px auto;
+    border-radius: 12px;
 }
 
-
-div.wrapper h1 {
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 20px;
     text-align: center;
-    color: darkblue;
-    margin: 10px auto;
-    font-size: 2.4 em; 
-
-}
-
-div.wrapper h2 {
-    text-align: left;
-    color: darkblue;
-    margin: 5px auto;
-    font-size: 2 em; 
-}
-
-
-section {
-    border: 2px solid darkblue;    
-    position: relative;
-    padding-bottom: 4px;
-}
-
-.profile-img {
-    width: 200px;       
-    height: 200px;      
-    object-fit: cover;  
-    border-radius: 50%;
-}
-
-.post-photo {
-    width: 400px;       
-    display: block;
-    margin: 20px auto;  
-    border-radius: 8px;
-}
-
-nav {
-    justify-self: end;
-    background: none;
-    color: darkblue;
-}
-
-nav li {
+  }
+  
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+  }
+  
+  .button {
     display: inline-block;
-    margin-left: 20px;
-}
-
-nav button {
-    background: none;
-    color: slategray;
-    font-family: Arial;
-    cursor: pointer; 
-    border: 0;
-    font-size: 1.2 em;
-}
-
-.mc-table {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-}
-
-
-.mc-table-head {
-    border: 1px dashed darkblue;    
-    display: table-row;
-    font-size: 1.2em;
-}
-
-.mc-table-head .detail {
-    display: table-cell;
-    color:darkblue;
-    font-weight: bold;
-    background-color: white;
-    padding: 5px;
-    position: relative;
-   
-}
-
-.mc-table-row  {
-    display: table-row;
-    border: 1px dashed darkblue;   
-    background-color: white;
-}
-
-
-.mc-table-row .detail {
-    color:darkblue;
-    display: table-cell;
-   
-    padding: 5px;
-}
-
-.mc-table-row .detail img {
-    max-height: 75px;
-    align-content: right;
-}
-
-
-.mc-table-row:hover {
-    background-color: aliceblue;    
-    border: 1px solid;
-}
-
-.site-form {
-    margin-top: 10px;
-    padding: 10px;
-}
-
-
-.site-form input, .site-form textarea, .site-form select {
-    display: block;
-    margin: 5px 0 0 0;
-    padding: 5px;
-}
-
-
-.site-form input [type="submit"] {
-    background: slategray;
-    border: 0;
-    color: fff;
-    font-size: 1.2em;
-    border-radius: 4px;
-    margin: 5px 0;
-}
-
-
-
-.helptext, .helptext.ul {
-    margin-top: 0 auto;
-    bottom: 20px;
-    color: #bbb;
-    font-size: 0.9em;
-}
-
-
-.errorlist li {
-    padding: 10px;
-    list-style-type: none;
-    border: 1px solid crimson;
-    color: crimson;
-    margin: 10px 0;
-}
-
-
-.errorlist {
-    padding: 0px;
-}
-
-.luffyimg {
-    width: 50%;
-    margin: 20px;  
-}
-
-.content {
-    text-align: center;
-}
-
-.delete-options {
-    display: flex;
-    flex-direction: row;
-}
-
-
-
-@media screen and (max-width: 560px) {
-    header h1 {
-        size: 0.8em;
-    }
-
-    nav li {
-        display: block;
-        margin-left: 0px;
-        font-size: 14px;
-        width: 100%;
-    }
-    
-    nav button {
-        background: none;
-        color: slategray;
-        font-family: Arial;
-        cursor: pointer; 
-        border: 0;
-        font-size: 20px;
-    }
-
-    img {
-        max-width: 95%;
-    }
-}
+    margin-top: 15px;
+    padding: 10px 18px;
+    background-color: #3d5afe;
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+  }
+  
+  .button:hover {
+    background-color: #304ffe;
+  }
